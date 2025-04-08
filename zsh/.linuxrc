@@ -1,0 +1,25 @@
+# vim: ft=bash
+
+alias open=xdg-open
+alias xclip="xclip -sel clip"
+
+source ~/.secretrc
+
+function airpodsctl {
+  SUBCOMMAND=$1
+
+ case "$SUBCOMMAND" in
+ "connect" | "c")
+    bluetoothctl connect $AIRPODS_ADDRESS
+     ;;
+ "disconnect" | "d")
+    bluetoothctl disconnect $AIRPODS_ADDRESS
+     ;;
+ *)
+   echo "airpodsctl [SUBCOMMAND]
+    connect     connects airpods
+    disconnect  disconnects airpods"
+     ;;
+ esac
+
+}

@@ -1,0 +1,29 @@
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[user]
+	name = Christian Rang
+	email = cj@rang-corp.com
+	signingkey = /home/crang/.ssh/id_rsa
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[diff]
+	renameLimit = 999999
+	tool = nvimdiff
+[color]
+	ui = true
+[difftool]
+	prompt = false
+[merge]
+	tool = nvimdiff
