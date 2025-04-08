@@ -71,6 +71,11 @@
     	source = rofi/.local/share/rofi/themes;
     	recursive = true;
     };
+
+    ".config/polybar/" = {
+    	source = polybar/.config/polybar;
+    	recursive = true;
+    };
   };
 
   # Home Manager can also manage your environment variables through
