@@ -65,6 +65,12 @@
     ".config/alacritty/alacritty.toml".source = alacritty/.config/alacritty/alacritty.toml;
     ".config/nitrogen/nitrogen.cfg".source = nitrogen/.config/nitrogen/nitrogen.cfg;
     ".config/picom.conf".source = picom/.config/picom.conf;
+
+    ".config/rofi/config.rasi".source = rofi/.config/rofi/config.rasi;
+    ".local/share/rofi/themes/" = {
+    	source = rofi/.local/share/rofi/themes;
+    	recursive = true;
+    };
   };
 
   # Home Manager can also manage your environment variables through
