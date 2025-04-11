@@ -62,7 +62,10 @@
     ".zshrc".source = zsh/.zshrc;
     ".gitconfig".source = git/.gitconfig;
     ".config/tmux/tmux.conf".source = tmux/.config/tmux/tmux.conf;
-    ".config/alacritty/alacritty.toml".source = alacritty/.config/alacritty/alacritty.toml;
+    ".config/alacritty/" = {
+    	source = alacritty/.config/alacritty;
+    	recursive = true;
+    };
     ".config/nitrogen/nitrogen.cfg".source = nitrogen/.config/nitrogen/nitrogen.cfg;
     ".config/picom.conf".source = picom/.config/picom.conf;
 
