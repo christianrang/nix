@@ -38,6 +38,7 @@
 	pkgs.polybar
 	pkgs.picom
 	pkgs.tmux
+	pkgs.libgcc
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -77,6 +78,11 @@
 
     ".config/polybar/" = {
     	source = polybar/.config/polybar;
+    	recursive = true;
+    };
+
+    ".config/nvim/" = {
+    	source = nvim/.config/nvim;
     	recursive = true;
     };
   };
