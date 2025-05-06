@@ -24,8 +24,6 @@
 	pkgs.ripgrep
 	pkgs.bat
 	pkgs.fzf
-	pkgs._1password-cli
-	pkgs._1password-gui
 	pkgs.rofi
 	pkgs.zathura
 	pkgs.kubernetes
@@ -39,6 +37,7 @@
 	pkgs.picom
 	pkgs.tmux
 	pkgs.gcc
+	pkgs.mods
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
