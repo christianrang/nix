@@ -38,7 +38,7 @@
 	pkgs.polybar
 	pkgs.picom
 	pkgs.tmux
-	pkgs.libgcc
+	pkgs.gcc
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -61,6 +61,7 @@
   # plain files is through 'home.file'.
   home.file = {
     ".zshrc".source = zsh/.zshrc;
+    ".i3/config".source = i3/.i3/config;
     ".gitconfig".source = git/.gitconfig;
     ".config/tmux/tmux.conf".source = tmux/.config/tmux/tmux.conf;
     ".config/alacritty/" = {
