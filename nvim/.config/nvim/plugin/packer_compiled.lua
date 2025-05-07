@@ -280,14 +280,6 @@ _G.packer_plugins = {
     path = "/home/crang/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
   },
-<<<<<<< Updated upstream
-  ["vim-tmux-navigator"] = {
-    loaded = true,
-    path = "/home/crang/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
-    url = "https://github.com/christoomey/vim-tmux-navigator"
-  },
-=======
->>>>>>> Stashed changes
   ["zen-mode.nvim"] = {
     loaded = true,
     path = "/home/crang/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
