@@ -38,6 +38,18 @@
 	pkgs.tmux
 	pkgs.gcc
 	pkgs.mods
+	pkgs.gum
+	pkgs.jq
+	pkgs.gh
+	pkgs.acpi
+	pkgs.alsa-utils
+    pkgs.tealdeer
+    pkgs.wofi
+    pkgs.hyprsunset
+    pkgs.socat
+    pkgs.playerctl
+    pkgs.go
+    pkgs.nodejs
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello

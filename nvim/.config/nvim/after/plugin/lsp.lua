@@ -1,8 +1,6 @@
 local lsp = require("lsp-zero")
 local builtin = require("telescope.builtin")
 
-lsp.preset("recommended")
-
 vim.g.coq_settings = {
     auto_start = true,
 }
@@ -10,16 +8,6 @@ vim.g.coq_settings = {
 local coq_settings = require('coq').lsp_ensure_capabilities()
 lsp.set_server_config({
   capabilities = coq_settings.capabilities,
-})
-
-lsp.set_preferences({
-    suggest_lsp_servers = false,
-    sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
-    }
 })
 
 lsp.on_attach(function(_, bufnr)
