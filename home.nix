@@ -51,6 +51,7 @@
     pkgs.go
     pkgs.nodejs
     pkgs.discord
+    pkgs.slack
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
