@@ -24,7 +24,6 @@
 	pkgs.ripgrep
 	pkgs.bat
 	pkgs.fzf
-	pkgs.rofi
 	pkgs.zathura
 	pkgs.kubernetes
 	pkgs.zsh-powerlevel10k
