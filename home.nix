@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
-{
+let
+    isI3 = false;
+in {
   home.username = "crang";
   home.homeDirectory = "/home/crang";
 
@@ -27,13 +29,11 @@
 	pkgs.zathura
 	pkgs.kubernetes
 	pkgs.zsh-powerlevel10k
-	pkgs.kitty
 	pkgs.alacritty
 	pkgs.obsidian
 	pkgs.nerd-fonts.hack
 	pkgs.nitrogen
 	pkgs.polybar
-	pkgs.picom
 	pkgs.tmux
 	pkgs.gcc
 	pkgs.mods
@@ -51,23 +51,12 @@
     pkgs.nodejs
     pkgs.discord
     pkgs.slack
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
+    pkgs.eww
+    pkgs.slack
+  ] ++ (lib.optionals isI3 [
+    pkgs.rofi
+    pkgs.picom
+  ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -83,10 +72,14 @@
     ".config/nitrogen/nitrogen.cfg".source = nitrogen/.config/nitrogen/nitrogen.cfg;
     ".config/picom.conf".source = picom/.config/picom.conf;
 
-    ".config/rofi/config.rasi".source = rofi/.config/rofi/config.rasi;
+    ".config/rofi/config.rasi" = {
+        enable = isI3;
+        source = rofi/.config/rofi/config.rasi;
+    };
     ".local/share/rofi/themes/" = {
-    	source = rofi/.local/share/rofi/themes;
-    	recursive = true;
+        enable = isI3;
+        source = rofi/.local/share/rofi/themes;
+        recursive = true;
     };
 
     ".config/polybar/" = {
