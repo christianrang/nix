@@ -98,6 +98,10 @@
     	source = nvim/.config/nvim;
     	recursive = true;
     };
+    ".config/zathura/" = {
+    	source = zathura/.config/zathura;
+    	recursive = true;
+    };
   };
 
   # Home Manager can also manage your environment variables through
