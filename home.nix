@@ -20,7 +20,6 @@ in {
   home.packages = [
   	pkgs.rclone
   	pkgs.stow
-  	pkgs.brave
 	pkgs.fd
 	pkgs.gh
 	pkgs.ripgrep
@@ -100,6 +99,7 @@ in {
   };
 
   programs.home-manager.enable = true;
+
   programs.zsh = {
     enable = true;
     oh-my-zsh = {
@@ -108,4 +108,12 @@ in {
   };
   programs.neovim.enable = true;
   programs.git.enable = true;
+
+  programs.brave = {
+      enable = true;
+      commandLineArgs = [
+        "--enable-features=TouchpadOverscrollHistoryNavigation"
+      ];
+  };
+
 }
