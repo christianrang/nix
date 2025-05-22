@@ -70,6 +70,7 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 require 'keymaps'
+require 'terminal'
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -240,6 +241,10 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      vim.keymap.set('n', '<leader>sp', function()
+        builtin.find_files { cwd =  '~/progdev/github.com/christianrang/' }
+      end, { desc = '[S]earch [P]rojects files' })
     end,
   },
 
