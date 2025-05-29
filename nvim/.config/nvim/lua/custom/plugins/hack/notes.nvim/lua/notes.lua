@@ -2,7 +2,7 @@ local M = {}
 
 local defaults = {}
 
---- @class @notes.Options
+--- @class notes.Options
 --- @field base_path string: The base path used when creating the daily notes directory
 
 --- @type notes.Options
@@ -10,7 +10,7 @@ local options = {
     base_path = os.getenv("HOME") .. "/vaults/vault/daily",
 }
 
---- @param opts present.Options
+--- @param opts notes.Options
 M.setup = function(opts)
     options = vim.tbl_deep_extend("force", defaults, opts or {})
 end
