@@ -1,3 +1,10 @@
+vim.api.nvim_create_autocmd('TermOpen', {
+    group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+    callback = function ()
+        vim.opt.scrolloff = 0
+    end,
+})
+
 local job_id = 0
 vim.keymap.set("n", "<leader>st", function()
     vim.cmd.vnew()
