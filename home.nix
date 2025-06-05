@@ -62,7 +62,6 @@ in {
         pkgs.nodejs
         pkgs.discord
         pkgs.slack
-        pkgs.chromium
         pkgs.bibata-cursors
         pkgs.catppuccin-cursors.mochaDark
         pkgs.jless
@@ -142,6 +141,19 @@ in {
         commandLineArgs = [
             "--enable-features=TouchpadOverscrollHistoryNavigation"
         ];
+        extensions = [
+            "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1password
+        ];
     };
 
+    programs.chromium = {
+        enable = true;
+        extensions = [
+            "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1password
+        ];
+        commandLineArgs = [
+            "--enable-features=TouchpadOverscrollHistoryNavigation,UseOzonePlatform"
+            "--ozone-platform=wayland"
+        ];
+    };
 }
