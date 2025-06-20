@@ -4,6 +4,9 @@ return {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
 
+    -- Virtual text
+    'theHamsta/nvim-dap-virtual-text',
+
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
 
@@ -117,5 +120,7 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+
+    require("nvim-dap-virtual-text").setup()
   end,
 }
