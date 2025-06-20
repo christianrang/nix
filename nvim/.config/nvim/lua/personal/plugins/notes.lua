@@ -1,6 +1,6 @@
 return {
   {
-    dir = '~/.config/nvim/lua/personal/plugins/hack/notes.nvim',
+    dir = '~/.config/nvim/lua/personal/plugins/local-plugins-development/notes.nvim',
     config = function()
       local notes = require 'notes'
 

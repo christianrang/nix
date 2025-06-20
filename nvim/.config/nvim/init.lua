@@ -187,10 +187,10 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
 
       vim.keymap.set('n', '<leader>sp', function()
-        builtin.find_files { cwd =  '~/progdev/github.com/christianrang/' }
+        builtin.find_files { cwd = '~/progdev/github.com/christianrang/' }
       end, { desc = '[S]earch [P]rojects files' })
 
-      require "personal.plugins.hack.misc.telescope.multigrep".setup()
+      require('personal.plugins.local-plugins-development.misc.telescope.multigrep').setup()
     end,
   },
 
