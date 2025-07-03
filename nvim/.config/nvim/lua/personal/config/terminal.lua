@@ -32,10 +32,10 @@ local decide_command = function()
     end
 
     local filetype_to_command = {
-        sh = vim.api.nvim_buf_get_name(0),
         bash = vim.api.nvim_buf_get_name(0),
+        go = 'go run ' .. vim.api.nvim_buf_get_name(0),
         python = 'python3 ' .. vim.api.nvim_buf_get_name(0),
-        go = 'go run ' .. vim.api.nvim_buf_get_name(0)
+        sh = vim.api.nvim_buf_get_name(0),
     }
 
     local command = filetype_to_command[vim.bo.filetype]
