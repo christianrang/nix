@@ -15,8 +15,9 @@ M.setup = function(opts)
   options = vim.tbl_deep_extend('force', defaults, opts or {})
 end
 
-local function get_daily_path()
-  local full_filepath = options.base_path .. os.date '/%Y/%m/%d/'
+--- @param timedelta integer?:
+local function get_daily_path(timedelta)
+  local full_filepath = options.base_path .. os.date('/%Y/%m/%d/', timedelta)
 
   return full_filepath
 end
@@ -67,9 +68,9 @@ M.daily_note = function()
 end
 
 M.tomorrow_daily_note = function()
-  local filename = 'daily_' .. os.date('%Y-%m-%d', os.time() + 24 * 60 * 60) .. '.md'
-  local filepath = get_daily_path()
-  print(filepath)
+  local tomorrows_date_delta = os.time() + 24 * 60 * 60
+  local filename = 'daily_' .. os.date("%Y-%m-%d", tomorrows_date_delta)  .. '.md'
+  local filepath = get_daily_path(tomorrows_date_delta)
 
   local function is_buffer_exists(options)
     local buffer_name = options.buffer_name

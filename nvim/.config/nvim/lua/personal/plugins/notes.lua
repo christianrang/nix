@@ -7,6 +7,10 @@ return {
       vim.keymap.set('n', '<leader>nd', function()
         notes.daily_note()
       end, { desc = 'Open daily note' })
+
+      vim.keymap.set('n', '<leader>nt', function()
+        notes.tomorrow_daily_note()
+      end, { desc = 'Open daily note' })
     end,
   },
 }
