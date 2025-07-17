@@ -12,6 +12,16 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+local function is_nixos()
+  local file = io.open("/etc/NIXOS", "r")
+  if file then
+    file:close()
+    return true
+  else
+    return false
+  end
+end
+
 require 'personal.config.keymaps'
 require 'personal.config.terminal'
 require 'hack'
@@ -60,7 +70,7 @@ require('lazy').setup({
     },
   },
 
-  { -- Useful plugin to show you pending keybinds.
+  {                     -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
@@ -134,7 +144,7 @@ require('lazy').setup({
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',    opts = {} },
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
@@ -355,6 +365,19 @@ require('lazy').setup({
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
+
+      -- don't install lua_ls if on nixos
+      if is_nixos() then
+        local lua_lsp_index = 0;
+        for i, v in ipairs(ensure_installed) do
+          if v == "lua_ls" then
+            lua_lsp_index = i
+          end
+        end
+        table.remove(ensure_installed, lua_lsp_index)
+        require('lspconfig')['lua_ls'].setup(servers.lua_ls)
+      end
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -362,7 +385,7 @@ require('lazy').setup({
         automatic_installation = false,
         handlers = {
           function(server_name)
-            local server = servers[server_name] or {}
+            local server = servers or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
