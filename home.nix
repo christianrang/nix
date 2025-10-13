@@ -9,14 +9,10 @@ in {
   imports = [
     ./modules/development
     ./modules/desktop/cursors.nix
-    ./modules/desktop/hyprland.nix
-    ./modules/desktop/i3.nix
+    ./modules/desktop
     ./modules/shell
     ./modules/terminal
   ];
-
-  # TODO I would like for this to be automagically set if I have i3 installed
-  # i3Module.enable = true;
 
   home.username = "crang";
   home.homeDirectory = homeDirectory;
