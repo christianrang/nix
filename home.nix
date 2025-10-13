@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, ... }:
 
 let
   theme_catppuccin-mocha = "catppuccin-mocha";
@@ -13,6 +13,8 @@ in {
     ./modules/shell
     ./modules/terminal
   ];
+
+  # desktopConfig.windowManager = "i3";
 
   home.username = "crang";
   home.homeDirectory = homeDirectory;
@@ -33,7 +35,6 @@ in {
     pkgs.zathura
     pkgs.obsidian
     pkgs.nerd-fonts.hack
-    pkgs.gcc
     pkgs.acpi
     pkgs.alsa-utils
     pkgs.socat
