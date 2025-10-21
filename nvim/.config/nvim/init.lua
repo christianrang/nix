@@ -24,6 +24,10 @@ end
 
 require 'personal.config.keymaps'
 require 'personal.config.terminal'
+require 'personal.config.nixd'
+require 'personal.scratch.educationalsp'
+require 'personal.scratch.rust-analyzer'
+require 'hack'
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -333,7 +337,6 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -371,6 +374,7 @@ require('lazy').setup({
         for i, v in ipairs(ensure_installed) do
           if v == "lua_ls" then
             lua_lsp_index = i
+            break
           end
         end
         table.remove(ensure_installed, lua_lsp_index)
