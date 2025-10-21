@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ alacritty nerd-fonts.hack ];
+  home.packages = with pkgs; [ ghostty alacritty nerd-fonts.hack ];
 
   home.file = {
     ".config/alacritty/" = {

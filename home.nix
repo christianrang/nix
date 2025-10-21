@@ -32,9 +32,7 @@ in {
 
   home.packages = [
     pkgs.tailscale
-    pkgs.zathura
     pkgs.obsidian
-    pkgs.nerd-fonts.hack
     pkgs.acpi
     pkgs.alsa-utils
     pkgs.socat
@@ -50,13 +48,6 @@ in {
     pkgs.playerctl
     pkgs.nodejs
   ];
-
-  home.file = {
-    ".config/zathura/" = {
-      source = zathura/.config/zathura;
-      recursive = true;
-    };
-  };
 
   home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 

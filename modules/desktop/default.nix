@@ -1,7 +1,7 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 {
-  imports = [ ./cursors.nix ./i3 ./hyprland ];
+  imports = [ ./cursors.nix ./i3 ./hyprland ./apps ];
   options = {
     desktopConfig = {
       windowManager = lib.mkOption {
@@ -12,7 +12,7 @@
     };
   };
 
-  config = lib.mkMerge [
+  config = lib.mkIf pkgs.stdenv.isLinux (lib.mkMerge [
     { }
     (lib.mkIf (config.desktopConfig.windowManager == "hyprland") {
       hyprlandModule.enable = true;
@@ -20,5 +20,5 @@
     (lib.mkIf (config.desktopConfig.windowManager == "i3") {
       i3Module.enable = true;
     })
-  ];
+  ]);
 }
