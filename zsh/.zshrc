@@ -20,6 +20,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 HIST_STAMPS="yyyy-mm-dd"
 
 plugins=(
+    direnv
     git
     zsh-autosuggestions
     golang
@@ -40,11 +41,13 @@ alias cat="bat"
 alias t="tmux"
 # Neovim
 alias vim="nvim"
-export EDITOR="nvim"
+export EDITOR="nvr -s"
 alias k=kubectl
 source <(kubectl completion zsh)
 alias kctx=kubectx
 alias kns=kubens
+
+alias nix-shell="nix-shell --run 'zsh'"
 
 alias tyrd='tmux neww -c "#{pane_current_path}" "yarn run dev"'
 alias tgrm='tmux neww -c "#{pane_current_path}" "go run ./cmd/*/main.go && sleep 10"'
@@ -58,7 +61,7 @@ export GITHUBPATH="$PROGDEV/github.com"
 export CRGHPATH="$GITHUBPATH/christianrang"
 export NOTES="$HOME/notes/"
 
-export DEVPATHS="/home/crang/progdev/github.com/christianrang /home/crang/progdev/gitlab.rang-corp.com/crang /home/crang/progdev/github.com/fastly /home/crang/Documents/projects"
+# export DEVPATHS="/home/crang/progdev/github.com/christianrang /home/crang/progdev/gitlab.rang-corp.com/crang /home/crang/progdev/soft.rang/southernfibernet /home/crang/Documents/projects"
 
 export GOPATH="$PROGDEV/go"
 export PATH="$PATH:$GOPATH/bin"
