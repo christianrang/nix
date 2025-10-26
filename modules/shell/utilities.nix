@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: 
+{
   home.packages = with pkgs; [
     fd
     gh
@@ -11,8 +12,9 @@
     gum
     jq
     unzip
-    kubernetes
     jless
     tealdeer
-  ];
+ ] ++ (lib.optionals (pkgs.stdenv.isLinux) [
+    kubernetes
+ ]);
 }

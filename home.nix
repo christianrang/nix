@@ -3,12 +3,12 @@
 let
   theme_catppuccin-mocha = "catppuccin-mocha";
   theme = theme_catppuccin-mocha;
-  homeDirectory = "/home/crang";
+  homeDirectory = "/Users/christian.rang";
+  isLinux = pkgs.stdenv.isLinux;
 
 in {
   imports = [
     ./modules/development
-    ./modules/desktop/cursors.nix
     ./modules/desktop
     ./modules/shell
     ./modules/terminal
@@ -16,7 +16,7 @@ in {
 
   # desktopConfig.windowManager = "i3";
 
-  home.username = "crang";
+  home.username = "christian.rang";
   home.homeDirectory = homeDirectory;
 
   # This value determines the Home Manager release that your configuration is
@@ -33,26 +33,31 @@ in {
   home.packages = [
     pkgs.tailscale
     pkgs.obsidian
-    pkgs.acpi
-    pkgs.alsa-utils
     pkgs.socat
-    pkgs.brightnessctl
 
-    pkgs.signal-desktop
-    pkgs.discord
     pkgs.slack
 
     pkgs.devenv
     pkgs.direnv
 
-    pkgs.playerctl
     pkgs.nodejs
-  ];
 
+  ] ++ (lib.optionals (isLinux) [
+    pkgs.alsa-utils
+    pkgs.acpi
+    pkgs.brightnessctl
+
+    pkgs.playerctl
+    pkgs.signal-desktop
+    pkgs.discord
+  ]);
+
+  # TODO: This should be only on linux
   home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
   programs.home-manager.enable = true;
 
+  # TODO: some of the configuration only needs to be set on linux
   programs.brave = {
     enable = true;
     commandLineArgs =
@@ -65,7 +70,7 @@ in {
   };
 
   programs.chromium = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux;
     extensions = [
       "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1password
     ] ++ (lib.optionals (theme == theme_catppuccin-mocha) [

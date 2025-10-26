@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   home.file = {
     ".config/nvim/" = {
-      enable = false;
+      enable = true;
       source = ../../nvim/.config/nvim;
       recursive = true;
     };

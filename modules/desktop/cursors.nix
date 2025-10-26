@@ -1,3 +1,3 @@
 { pkgs, ... }: {
-  home.packages = [ pkgs.bibata-cursors pkgs.catppuccin-cursors.mochaDark ];
+  home.packages = with pkgs; [ ] ++ (lib.optionals (pkgs.stdenv.isLinux) [ bibata-cursors catppuccin-cursors.mochaDark ]);
 }

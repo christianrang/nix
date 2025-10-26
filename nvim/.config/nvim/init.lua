@@ -24,7 +24,6 @@ end
 
 require 'personal.config.keymaps'
 require 'personal.config.terminal'
-require 'hack'
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

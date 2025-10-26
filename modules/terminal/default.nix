@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ ghostty alacritty nerd-fonts.hack ];
+  home.packages = with pkgs; [ alacritty nerd-fonts.hack ] ++ (lib.optionals (pkgs.stdenv.isLinux) [ ghostty ]);
 
   home.file = {
     ".config/alacritty/" = {
