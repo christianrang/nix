@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+
+set -e
+
+REPOLIST=""
+REPO_LIST_CACHE_DIR="$HOME/.cache/gclone"
+REPO_LIST_CACHE="$REPO_LIST_CACHE_DIR/repo_list_cache"
+DEFAULT_DIR="$HOME/progdev/github.com/"
+
+if [[ `uname` == "Darwin" ]]; then
+  # jq="/opt/homebrew/bin/jq"
+  # gh="/opt/homebrew/bin/gh"
+  gh="/Users/christian.rang/.nix-profile/bin/gh"
+  jq="/usr/bin/jq"
+elif [[ `uname` == "Linux" ]]; then
+  jq="/usr/bin/jq"
+  gh="/usr/bin/gh"
+fi
+
+if [ ! -d $REPO_LIST_CACHE_DIR ]; then
+  mkdir -p $REPO_LIST_CACHE_DIR
+  exit 1
+fi
+
+HELP="  
+Clones repo into progdev dir
+
+USAGE:
+  gclone [command]
+  gclone [flags]
+
+
+Command:
+  update-cache               Updates the cached repo list
+
+Flags:
+  -r, --repo                 Sets the target repo to be pulled from Github
+"
+
+function cache_repo_list() {
+  printf "%s\n" "${REPOLIST[@]}" > $REPO_LIST_CACHE
+}
+
+function get_repolist() {
+    SAVEIFS=$IFS
+    IFS=$'\n'
+    REPOLIST=($(cat $REPO_LIST_CACHE))
+    IFS=$SAVEIFS
+
+    if [ ${#REPOLIST[@]} -lt 2 ]; then
+        REPOLIST=$($gh repo list christianrang -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
+        REPOLIST+=$($gh repo list runreveal -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
+        cache_repo_list $REPOLIST
+    fi
+}
+
+function create_cache_dir() {
+    mkdir -p ~/.cache/cydclone &> /dev/null
+}
+
+DIR=$DEFAULT_DIR
+
+create_cache_dir
+
+while true;
+do
+    case $1 in 
+        "-h"|"--help")
+          echo "$HELP"
+          exit 0
+          ;;
+        "update-cache")
+            REPOLIST=$($gh repo list christianrang -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
+            REPOLIST+=$($gh repo list runreveal -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
+            cache_repo_list
+            exit 0
+            ;;
+        "-r"|"--repo")
+            REPO=$2
+            shift 2
+            ;;
+        "")
+            break
+            ;;
+        *)
+            echo "Invalid option: '$1'"
+            echo "$HELP"
+            exit 1
+            ;;
+    esac
+done
+
+if [ -z $REPO ]; then
+  get_repolist
+  REPO=$(printf "%s\n" "${REPOLIST[@]}" | fzf --prompt "Select repo to clone: ")
+fi
+
+gum spin --title "Getting $REPO" --show-output -- git clone --quiet --bare git@github.com:$REPO $DIR/$REPO
+
+pushd $DIR/$REPO 2&>/dev/null
+  # Determine if master or main and pull that branch
+MAIN_BRANCH=$(git branch -l master main | awk '{print $2}')
+  if [ ! -d $MAIN_BRANCH ]; then
+    git worktree add $MAIN_BRANCH >/dev/null
+    pushd $DIR/$REPO/$MAIN_BRANCH &>/dev/null
+      $gh repo set-default 2&> /dev/null
+    popd &> /dev/null
+  fi
+popd &> /dev/null
