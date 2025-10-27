@@ -25,9 +25,8 @@ end
 require 'personal.config.keymaps'
 require 'personal.config.terminal'
 require 'personal.config.nixd'
-require 'personal.scratch.educationalsp'
+-- require 'personal.scratch.educationalsp'
 require 'personal.scratch.rust-analyzer'
-require 'hack'
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

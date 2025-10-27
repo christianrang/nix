@@ -19,7 +19,6 @@ fi
 
 if [ ! -d $REPO_LIST_CACHE_DIR ]; then
   mkdir -p $REPO_LIST_CACHE_DIR
-  exit 1
 fi
 
 HELP="  
@@ -49,6 +48,7 @@ function get_repolist() {
 
     if [ ${#REPOLIST[@]} -lt 2 ]; then
         REPOLIST=$($gh repo list christianrang -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
+        REPOLIST+=$(printf '\n')
         REPOLIST+=$($gh repo list runreveal -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
         cache_repo_list $REPOLIST
     fi
@@ -71,6 +71,7 @@ do
           ;;
         "update-cache")
             REPOLIST=$($gh repo list christianrang -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
+            REPOLIST+=$(printf '\n')
             REPOLIST+=$($gh repo list runreveal -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
             cache_repo_list
             exit 0

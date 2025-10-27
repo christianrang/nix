@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }:
 
 {
-  imports = [ ./cursors.nix ./i3 ./hyprland ./apps ];
+  imports = [ ./cursors.nix ./i3 ./hyprland ./apps ./aerospace ];
   options = {
     desktopConfig = {
       windowManager = lib.mkOption {

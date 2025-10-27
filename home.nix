@@ -4,8 +4,8 @@ let
   theme_catppuccin-mocha = "catppuccin-mocha";
   theme = theme_catppuccin-mocha;
   homeDirectory = "/Users/christian.rang";
-  isLinux = pkgs.stdenv.isLinux;
 
+  isLinux = pkgs.stdenv.isLinux;
 in {
   imports = [
     ./modules/development
@@ -13,6 +13,10 @@ in {
     ./modules/shell
     ./modules/terminal
   ];
+
+  home.activation.makeTrampolineApps = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    builtins.readFile ./make-app-trampolines.sh
+  );
 
   # desktopConfig.windowManager = "i3";
 
@@ -41,7 +45,6 @@ in {
     direnv
 
     nodejs
-
   ] ++ (lib.optionals isLinux [
     alsa-utils
     acpi
