@@ -30,26 +30,26 @@ in {
 
   nixpkgs.config.allowUnfree = true;
 
-  home.packages = [
-    pkgs.tailscale
-    pkgs.obsidian
-    pkgs.socat
+  home.packages = with pkgs; [
+    tailscale
+    obsidian
+    socat
 
-    pkgs.slack
+    slack
 
-    pkgs.devenv
-    pkgs.direnv
+    devenv
+    direnv
 
-    pkgs.nodejs
+    nodejs
 
-  ] ++ (lib.optionals (isLinux) [
-    pkgs.alsa-utils
-    pkgs.acpi
-    pkgs.brightnessctl
+  ] ++ (lib.optionals isLinux [
+    alsa-utils
+    acpi
+    brightnessctl
 
-    pkgs.playerctl
-    pkgs.signal-desktop
-    pkgs.discord
+    playerctl
+    signal-desktop
+    discord
   ]);
 
   # TODO: This should be only on linux
