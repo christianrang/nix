@@ -26,7 +26,7 @@ plugins=(
     golang
     z
     docker
-    kubectl
+    # kubectl
     python
     react-native
     terraform
@@ -43,7 +43,8 @@ alias t="tmux"
 alias vim="nvim"
 export EDITOR="nvr -s"
 alias k=kubectl
-source <(kubectl completion zsh)
+# TODO: this should only be run if kubectl is installed
+# source <(kubectl completion zsh)
 alias kctx=kubectx
 alias kns=kubens
 
