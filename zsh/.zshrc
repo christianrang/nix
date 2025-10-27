@@ -43,6 +43,7 @@ alias t="tmux"
 alias vim="nvim"
 export EDITOR="nvr -s"
 alias k=kubectl
+
 # TODO: this should only be run if kubectl is installed
 # source <(kubectl completion zsh)
 alias kctx=kubectx
