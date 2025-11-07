@@ -9,7 +9,7 @@ fi
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(printf "%s\n" "${DEVPATHS[@]}" | fzf | awk '{print "/home/crang/progdev/" $1}')
+    selected=$(printf "%s\n" "${DEVPATHS[@]}" | fzf | awk "{print \"${HOME}/progdev/\" \$1}")
 fi
 
 if [[ -z $selected ]]; then
