@@ -9,7 +9,7 @@
     home.packages = [ pkgs.aerospace ];
     home.file = {
       ".config/aerospace/" = {
-        source = ../../../aerospace/.config/aerospace;
+        source = ../../../../aerospace/.config/aerospace;
         recursive = true;
       };
     };

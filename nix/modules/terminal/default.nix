@@ -3,7 +3,7 @@
 
   home.file = {
     ".config/alacritty/" = {
-      source = ../../alacritty/.config/alacritty;
+      source = ../../../alacritty/.config/alacritty;
       recursive = true;
     };
   };

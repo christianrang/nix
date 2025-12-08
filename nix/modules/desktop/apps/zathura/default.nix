@@ -3,7 +3,7 @@
 
   home.file = {
     ".config/zathura/" = {
-      source = ../../../../zathura/.config/zathura;
+      source = ../../../../../zathura/.config/zathura;
       recursive = true;
     };
   };

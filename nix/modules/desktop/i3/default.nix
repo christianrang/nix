@@ -8,25 +8,25 @@ in {
     home.packages = [ pkgs.polybar pkgs.nitrogen pkgs.rofi pkgs.picom ];
 
     home.file = {
-      ".i3/config".source = ../../../i3/.i3/config;
+      ".i3/config".source = ../../../../i3/.i3/config;
 
       ".config/nitrogen/nitrogen.cfg" = {
-        source = ../../../nitrogen/.config/nitrogen/nitrogen.cfg;
+        source = ../../../../nitrogen/.config/nitrogen/nitrogen.cfg;
       };
 
-      ".config/picom.conf" = { source = ../../../picom/.config/picom.conf; };
+      ".config/picom.conf" = { source = ../../../../picom/.config/picom.conf; };
 
       ".config/rofi/config.rasi" = {
-        source = ../../../rofi/.config/rofi/config.rasi;
+        source = ../../../../rofi/.config/rofi/config.rasi;
       };
 
       ".local/share/rofi/themes/" = {
-        source = ../../../rofi/.local/share/rofi/themes;
+        source = ../../../../rofi/.local/share/rofi/themes;
         recursive = true;
       };
 
       ".config/polybar/" = {
-        source = ../../../polybar/.config/polybar;
+        source = ../../../../polybar/.config/polybar;
         recursive = true;
       };
     };

@@ -2,7 +2,7 @@
   home.file = {
     ".config/nvim/" = {
       enable = true;
-      source = ../../nvim/.config/nvim;
+      source = ../../../nvim/.config/nvim;
       recursive = true;
     };
   };
