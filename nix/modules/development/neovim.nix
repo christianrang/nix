@@ -7,9 +7,7 @@
     };
   };
 
-  home.packages = with pkgs; [ neovim-remote ];
-
   programs.neovim.enable = true;
 
-  home.sessionVariables = { EDITOR = "nvr -s"; };
+  home.sessionVariables = { EDITOR = "nvim"; };
 }
