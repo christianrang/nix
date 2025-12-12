@@ -6,7 +6,7 @@
 [user]
 	name = Christian Rang
 	email = cj@rang-corp.com
-	signingkey = /Users/christian.rang/.ssh/id_rsa
+	signingkey = ~/.ssh/id_rsa
 [init]
 	defaultBranch = main
 [push]
