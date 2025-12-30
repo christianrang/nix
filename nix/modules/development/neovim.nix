@@ -1,4 +1,7 @@
 { pkgs, ... }: {
+
+  home.packages = with pkgs; [ ast-grep ];
+
   home.file = {
     ".config/nvim/" = {
       enable = true;
