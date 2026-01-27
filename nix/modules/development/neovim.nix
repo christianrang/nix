@@ -1,6 +1,6 @@
 { pkgs, ... }: {
 
-  home.packages = with pkgs; [ ast-grep ];
+  home.packages = with pkgs; [ ast-grep neovim ];
 
   home.file = {
     ".config/nvim/" = {
@@ -9,8 +9,6 @@
       recursive = true;
     };
   };
-
-  programs.neovim.enable = true;
 
   home.sessionVariables = { EDITOR = "nvim"; };
 }
