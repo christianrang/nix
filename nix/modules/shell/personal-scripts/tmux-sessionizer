@@ -16,8 +16,22 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
+
 selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
+
+pushd $selected
+worktrees=`git worktree list`
+
+if [[ "$(printf "%s" "$worktrees" | awk '{print $1}')/" != $selected ]]; then
+    selected_worktree=`printf "%s" "$worktrees" | fzf`
+    worktree_name=`printf "${selected_worktree}" | awk '{print $3}' | tr -d "[]"`
+    selected_name="$(basename "$selected" | tr . _)/${worktree_name}"
+    echo "Selected: " $selected_name
+    echo "Worktree Name: " $worktree_name
+    echo "Selected Worktree: " $selected_worktree
+fi
+popd
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
     tmux new-session -s $selected_name -c $selected
