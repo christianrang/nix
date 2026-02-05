@@ -24,7 +24,7 @@ pushd $selected > /dev/null
 
 worktrees=`git worktree list 2>/dev/null`
 
-if [ "$(printf "%s" "$worktrees" | awk '{print $1}')/" != $selected ] && [ -z ! $worktrees ]; then
+if [ "$(printf "%s" "$worktrees" | awk '{print $1}')/" != $selected ] && [ -z $1 ]; then
     selected_worktree=`printf "%s" "$worktrees" | fzf`
     worktree_name=`printf "${selected_worktree}" | awk '{print $3}' | tr -d "[]"`
     selected_name="$(basename "$selected" | tr . _)/${worktree_name}"
