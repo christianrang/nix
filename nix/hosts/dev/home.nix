@@ -5,7 +5,6 @@ let
 in {
   imports = [
     ../../modules/development
-    ../../modules/desktop
     ../../modules/shell
     ../../modules/terminal
   ];
