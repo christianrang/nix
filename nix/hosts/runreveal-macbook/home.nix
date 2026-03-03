@@ -6,8 +6,6 @@ let
   homeDirectory = "/Users/christian.rang";
 
   isLinux = pkgs.stdenv.isLinux;
-
-  moveMe = true;
 in {
   imports = [
     ../../modules/development
@@ -38,8 +36,8 @@ in {
 
     slack
 
-    devenv
-    direnv
+    # devenv
+    # direnv
 
     nodejs
 
@@ -51,10 +49,7 @@ in {
     playerctl
     signal-desktop
     discord
-  ] ++ (lib.optionals moveMe [
-    # Temporary add for runreveal work
-    google-chrome
-  ]));
+  ]);
 
   # TODO: This should be only on linux
   home.sessionVariables = { NIXOS_OZONE_WL = "1"; };

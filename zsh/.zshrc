@@ -20,7 +20,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 HIST_STAMPS="yyyy-mm-dd"
 
 plugins=(
-    direnv
+    # direnv
     git
     zsh-autosuggestions
     golang
@@ -41,7 +41,7 @@ alias cat="bat"
 alias t="tmux"
 # Neovim
 alias vim="nvim"
-export EDITOR="nvr -s"
+export EDITOR="nvim"
 alias k=kubectl
 
 # TODO: this should only be run if kubectl is installed
@@ -97,5 +97,6 @@ export CHEAT_USE_FZF=true
 
 # alias mods="OPENAI_API_KEY=$(pass show openai/api_key) mods"
 
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
