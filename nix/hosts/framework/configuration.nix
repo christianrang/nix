@@ -51,8 +51,20 @@ in {
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = i3 || hyprland;
-  services.libinput.touchpad.naturalScrolling = i3;
+  # services.xserver.enable = i3 || hyprland;
+  # services.libinput.touchpad.naturalScrolling = i3;
+
+  security = {
+    polkit.enable = true;
+    pam.services.hyprlock = {};
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+    ];
+  };
 
   services.xserver.windowManager.i3.enable = i3;
   services.tailscale.enable = true;
@@ -116,7 +128,8 @@ in {
 
   programs.zsh.enable = true;
 
-  programs.hyprland.enable = true;
+  programs.hyprland.enable = hyprland;
+  programs.hyprlock.enable = hyprland;
 
   programs._1password.enable = true;
 
@@ -149,6 +162,20 @@ in {
 	rootless = {
 		enable = true;
 	};
+  };
+
+  fonts = {
+    fontconfig.enable = true;
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-color-emoji
+      # Optional: Add specific Chinese fonts if needed
+      source-han-sans
+      source-han-serif
+    ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
