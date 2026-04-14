@@ -48,19 +48,13 @@ function get_repolist() {
 
     if [ ${#REPOLIST[@]} -lt 2 ]; then
         REPOLIST=$($gh repo list christianrang -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
-        REPOLIST+=$(printf '\n')
+        REPOLIST+=$(printf ' ')
         REPOLIST+=$($gh repo list runreveal -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
         cache_repo_list $REPOLIST
     fi
 }
 
-function create_cache_dir() {
-    mkdir -p ~/.cache/cydclone &> /dev/null
-}
-
 DIR=$DEFAULT_DIR
-
-create_cache_dir
 
 while true;
 do
@@ -71,8 +65,9 @@ do
           ;;
         "update-cache")
             REPOLIST=$($gh repo list christianrang -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
-            REPOLIST+=$(printf '\n')
+            REPOLIST+=$(printf ' ')
             REPOLIST+=$($gh repo list runreveal -L 10000 --json name,owner | jq -r '.[] | .name as $repo_name | .owner.login as $org | $org + "/" + $repo_name | @text')
+            echo $REPOLIST
             cache_repo_list
             exit 0
             ;;
