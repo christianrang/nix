@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776373306,
-        "narHash": "sha256-iAJIzHngGZeLIkjzuuWI6VBsYJ1n89a/Esq0m8R1vjs=",
+        "lastModified": 1776889563,
+        "narHash": "sha256-NiSQJ2n2El/oY+3Yu++5+v7pcwMF0wgYD7pDhmAhPmk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d401492e2acd4fea42f7705a3c266cea739c9c36",
+        "rev": "83b3ecce2eafc9082af7375b1a295070e199960a",
         "type": "github"
       },
       "original": {
@@ -22,11 +22,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1776169885,
-        "narHash": "sha256-l/iNYDZ4bGOAFQY2q8y5OAfBBtrDAaPuRQqWaFHVRXM=",
+        "lastModified": 1776548001,
+        "narHash": "sha256-ZSK0NL4a1BwVbbTBoSnWgbJy9HeZFXLYQizjb2DPF24=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4bd9165a9165d7b5e33ae57f3eecbcb28fb231c9",
+        "rev": "b12141ef619e0a9c1c84dc8c684040326f27cdcc",
         "type": "github"
       },
       "original": {
@@ -38,11 +38,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1776169885,
-        "narHash": "sha256-l/iNYDZ4bGOAFQY2q8y5OAfBBtrDAaPuRQqWaFHVRXM=",
+        "lastModified": 1776548001,
+        "narHash": "sha256-ZSK0NL4a1BwVbbTBoSnWgbJy9HeZFXLYQizjb2DPF24=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4bd9165a9165d7b5e33ae57f3eecbcb28fb231c9",
+        "rev": "b12141ef619e0a9c1c84dc8c684040326f27cdcc",
         "type": "github"
       },
       "original": {
@@ -64,11 +64,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1776267277,
-        "narHash": "sha256-/VmFGJTyD3AcEvb5hcTLnsWxnF2IThQVU7PClOfYKU0=",
+        "lastModified": 1776702192,
+        "narHash": "sha256-FOkQz0J2hgsIH5WLh7qferblhWAKDItG6dQKisLl2Gw=",
         "ref": "refs/heads/main",
-        "rev": "b143d213c8ebee3f1fbd783f1931ea82dfa4dc36",
-        "revCount": 4,
+        "rev": "ccf6fe17193cfd95504a5d268f1b0302d139fa5f",
+        "revCount": 5,
         "type": "git",
         "url": "ssh://git@github.com/christianrang/runreveal-dots"
       },
