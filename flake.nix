@@ -9,18 +9,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Private repo — set flake = false if it's not a flake itself
-    # private-repo = {
-    #   url = "github:your-org/private-repo";
-    #   flake = false;
-    # };
+    runreveal-dots = {
+      url = "git+ssh://git@github.com/christianrang/runreveal-dots";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: let
+  outputs = { nixpkgs, home-manager, ... }@inputs: let
     mkHome = system: module: home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
       modules = [ module ];
-      # extraSpecialArgs = { inherit private-repo; };
+      extraSpecialArgs = { inherit inputs; };
     };
   in {
     homeConfigurations = {
