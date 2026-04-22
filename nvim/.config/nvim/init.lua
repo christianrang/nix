@@ -1,3 +1,5 @@
+require('vim._core.ui2').enable({})
+
 require 'personal.config.opt'
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
