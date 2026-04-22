@@ -1,20 +1,21 @@
-{ lib, pkgs, ... }:
+{ inputs, lib, pkgs, ... }:
 
 let
   theme_catppuccin-mocha = "catppuccin-mocha";
   theme = theme_catppuccin-mocha;
   homeDirectory = "/Users/christian.rang";
-
-  isLinux = pkgs.stdenv.isLinux;
 in {
   imports = [
     ../../modules/development
     ../../modules/desktop
     ../../modules/shell
     ../../modules/terminal
+    inputs.runreveal-dots.homeManagerModules.default
   ];
 
   # desktopConfig.windowManager = "i3";
+  runreveal.enable = true;                                                                      
+
 
   home.username = "christian.rang";
   home.homeDirectory = homeDirectory;
@@ -36,20 +37,10 @@ in {
 
     slack
 
-    # devenv
-    # direnv
+    podman
 
     nodejs
-
-  ] ++ (lib.optionals isLinux [
-    alsa-utils
-    acpi
-    brightnessctl
-
-    playerctl
-    signal-desktop
-    discord
-  ]);
+  ];
 
   # TODO: This should be only on linux
   home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
