@@ -18,6 +18,14 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 HIST_STAMPS="yyyy-mm-dd"
+HISTFILE=~/.zsh_history
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+setopt EXTENDED_HISTORY      # Write timestamps to history file
+setopt SHARE_HISTORY         # Share history between all sessions
+setopt HIST_IGNORE_ALL_DUPS  # Delete old recorded entry if new entry is a duplicate
+setopt HIST_REDUCE_BLANKS    # Remove superfluous blanks from history
 
 plugins=(
     # direnv
@@ -26,7 +34,7 @@ plugins=(
     golang
     z
     docker
-    # kubectl
+    kubectl
     python
     react-native
     terraform
