@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-  imports = [ 
-        ./zathura 
+  imports = [
+        ./zathura
         ./mac
     ];
   # home.packages = with pkgs; [ spotify ];

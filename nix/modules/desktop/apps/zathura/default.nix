@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: lib.mkIf pkgs.stdenv.isLinux {
   home.packages = with pkgs; [ zathura ];
 
   home.file = {
