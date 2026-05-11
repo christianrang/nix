@@ -81,6 +81,5 @@ vim.keymap.set('n', '<leader>gf', function()
     if command == nil then
         return
     end
-    vim.cmd.vnew()
     vim.cmd.term(command)
 end, { desc = '[g]it [f]iles' })
