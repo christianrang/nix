@@ -69,6 +69,8 @@ alt-a = 'exec-and-forget open https://fishtechgroup.atlassian.net/jira/ops/alert
 alt-i = 'exec-and-forget open https://fishtechgroup.atlassian.net/jira/software/c/projects/DATA/boards/1764'
 alt-c = 'exec-and-forget open https://fishtechgroup.atlassian.net/jira/software/c/projects/ENG/boards/14'
 
+alt-n = 'exec-and-forget open https://www.notion.so/326bbc03f62b8051853cd2744ea53a9d?v=326bbc03f62b80b3b507000c8d6cc52b'
+
 [mode.resize.binding]
 h = 'resize width -50'
 j = 'resize height +50'
