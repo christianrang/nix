@@ -26,6 +26,7 @@ end
 
 require 'personal.config.keymaps'
 require 'personal.config.terminal'
+require 'personal.config.ai'
 require 'personal.config.nixd'
 -- require 'personal.scratch.educationalsp'
 require 'personal.scratch.rust-analyzer'
@@ -368,6 +369,9 @@ require('lazy').setup({
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
+      vim.list_extend(ensure_installed, {
+        'prettierd',
+      })
 
       -- don't install lua_ls if on nixos
       if is_nixos() then
@@ -431,6 +435,19 @@ require('lazy').setup({
           }
         end
       end,
+      formatters_by_ft = {
+        javascript = { 'prettierd' },
+        javascriptreact = { 'prettierd' },
+        typescript = { 'prettierd' },
+        typescriptreact = { 'prettierd' },
+        html = { 'prettierd' },
+        css = { 'prettierd' },
+        scss = { 'prettierd' },
+        less = { 'prettierd' },
+        json = { 'prettierd' },
+        jsonc = { 'prettierd' },
+        yaml = { 'prettierd' },
+      },
     },
   },
 
