@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    hdmi-switch-cli.url = "github:christianrang/hdmi-switch-cli";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -24,10 +25,10 @@
         };
     in {
       homeConfigurations = {
-        "christian.rang" =
+        "runreveal-macbook" =
           mkHome "aarch64-darwin" ./nix/hosts/runreveal-macbook/home.nix;
-        "root" = mkHome "x86_64-linux" ./nix/hosts/dev/home.nix;
-        "crang" = mkHome "x86_64-linux" ./nix/hosts/framework/home.nix;
+        "dev" = mkHome "x86_64-linux" ./nix/hosts/dev/home.nix;
+        "framework" = mkHome "x86_64-linux" ./nix/hosts/framework/home.nix;
       };
     };
 }
