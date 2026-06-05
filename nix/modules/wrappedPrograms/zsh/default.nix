@@ -1,6 +1,6 @@
 { inputs, self, ... }: {
   flake.modules.zsh = { pkgs, ... }: {
-    home.packages = with pkgs; [ zsh zsh-powerlevel10k ];
+    home.packages = with pkgs; [ zsh zsh-powerlevel10k fzf ];
 
     home.file = { ".zshrc".source = ./.zshrc; };
   };

@@ -2,6 +2,15 @@
   flake.modules.neovim = { pkgs, ... }: {
     programs.neovim.enable = true;
 
+    home.packages = with pkgs; [
+      lua-language-server
+      stylua
+
+      (python313.withPackages (python-pkgs: [ python-pkgs.debugpy ]))
+
+      postgresql
+    ];
+
     home.file = {
       ".config/nvim/" = {
         enable = true;
