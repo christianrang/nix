@@ -1,7 +1,3 @@
--- improvements for later:
--- - reusing the terminal with rc doesn't reopen it
--- - add the ability to name terminals and use telescope to pick which one to reopen
-
 vim.api.nvim_create_autocmd('TermOpen', {
     group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
     callback = function()
@@ -9,44 +5,13 @@ vim.api.nvim_create_autocmd('TermOpen', {
     end,
 })
 
--- Tagged so other plugins' terminals (e.g. Claude) are never reused.
-local find_terminal_buf = function()
-    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.api.nvim_buf_is_loaded(buf) and vim.b[buf].scratch_terminal then
-            return buf
-        end
-    end
-
-    return nil
-end
-
--- Focus the scratch terminal, creating it if needed. Returns its channel id.
-local open_terminal = function()
-    local buf = find_terminal_buf()
-
-    if buf == nil then
-        vim.cmd.vnew()
-        vim.cmd.term()
-        vim.b.scratch_terminal = true
-
-        return vim.bo.channel
-    end
-
-    local win = vim.fn.bufwinid(buf)
-    if win ~= -1 then
-        vim.api.nvim_set_current_win(win)
-    else
-        vim.cmd.vsplit()
-        vim.api.nvim_set_current_buf(buf)
-    end
-
-    return vim.bo[buf].channel
-end
-
 local job_id = 0
 vim.keymap.set('n', '<leader>st', function()
-    job_id = open_terminal()
-end, { desc = '[s]plit [t]erminal' })
+    vim.cmd.vnew()
+    vim.cmd.term()
+
+    job_id = vim.bo.channel
+end)
 
 local strsplit = function(inputstr, sep)
     if sep == nil then
@@ -91,13 +56,18 @@ vim.keymap.set('n', '<leader>rv', function()
 end, { desc = '[R]un [v]ertically' })
 
 vim.keymap.set('n', '<leader>rc', function()
+    local chan_info = vim.api.nvim_get_chan_info(job_id)
+
     local command = decide_command()
     if command == nil then
         return
     end
 
-    if next(vim.api.nvim_get_chan_info(job_id)) == nil then
-        job_id = open_terminal()
+    if next(chan_info) == nil then
+        vim.cmd.vnew()
+        vim.cmd.term()
+
+        job_id = vim.bo.channel
     end
 
     vim.fn.chansend(job_id, { command .. '\r\n' })
