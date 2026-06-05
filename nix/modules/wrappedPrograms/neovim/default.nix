@@ -12,5 +12,13 @@
 
     home.sessionVariables = { EDITOR = "nvim"; };
   };
-  perSystem = { pkgs, self', ... }: { };
+  perSystem = { pkgs, self', ... }: {
+    apps.neovim = {
+      type = "app";
+      program = "${pkgs.writeShellScript "neovim" ''
+        ln -sf ${../../../nvim/.config/nvim} "$HOME/.config/nvim"
+        exec ${pkgs.lib.getExe pkgs.neovim} "$@"
+      ''}";
+    };
+  };
 }
