@@ -16,6 +16,7 @@
     apps.neovim = {
       type = "app";
       program = "${pkgs.writeShellScript "neovim" ''
+        mkdir -p "$HOME/.config"
         ln -sf ${./.config/nvim} "$HOME/.config/nvim"
         exec ${pkgs.lib.getExe pkgs.neovim} "$@"
       ''}";

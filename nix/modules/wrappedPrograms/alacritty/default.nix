@@ -16,6 +16,7 @@
     apps.alacritty = {
       type = "app";
       program = "${pkgs.writeShellScript "alacritty" ''
+        mkdir -p "$HOME/.config"
         ln -sf ${./.config/alacritty} "$HOME/.config/alacritty"
         exec ${pkgs.lib.getExe pkgs.alacritty} "$@"
       ''}";
