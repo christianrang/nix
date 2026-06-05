@@ -40,7 +40,6 @@ plugins=(
     terraform
     helm
     fzf
-    jj
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -109,9 +108,3 @@ export CHEAT_USE_FZF=true
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-alias gh='GIT_DIR=`jj git root` gh'
-
-alias tmproj='TMP=$(mktemp -d); cp -r ~/templates/`ls ~/templates | fzf`/* $TMP && echo $TMP'
