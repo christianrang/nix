@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# copied from https://github.com/ThePrimeagen
+
+if [[ -z $DEVPATHS ]]; then
+    DEVPATHS=`fd --exact-depth=3 --base-directory ~/progdev/`
+fi
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(printf "%s\n" "${DEVPATHS[@]}" | fzf | awk "{print \"${HOME}/progdev/\" \$1}")
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+pushd $selected > /dev/null
+
+worktrees=`git worktree list 2>/dev/null`
+
+if [ "$(printf "%s" "$worktrees" | awk '{print $1}')/" != $selected ] && [ -z $1 ]; then
+    selected_worktree=`printf "%s" "$worktrees" | fzf`
+    worktree_name=`printf "${selected_worktree}" | awk '{print $3}' | tr -d "[]"`
+    selected_name="$(basename "$selected" | tr . _)/${worktree_name}"
+    selected=$(printf "%s" "$selected_worktree" | awk '{print $1}')
+fi
+popd > /dev/null
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected
+    exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+tmux switch-client -t $selected_name

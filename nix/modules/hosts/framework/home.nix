@@ -23,10 +23,6 @@ in {
   # It's imported both in standalone configuration above, and in your nixos configuration
   flake.homeModules.crangModule = { pkgs, ... }: {
     imports = [
-      #   ../../modules/development
-      #   ../../modules/desktop
-      #   ../../modules/shell
-      #   ../../modules/terminal
       self.modules.neovim
       self.modules.alacritty
       self.modules.tmux
