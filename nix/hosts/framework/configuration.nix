@@ -5,18 +5,17 @@
 { config, pkgs, ... }:
 
 let
-	i3 = false;
-	hyprland = true;
+  i3 = false;
+  hyprland = true;
 
 in {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./modules/gnome.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./modules/gnome.nix
+  ];
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-    nix.settings.trusted-users = [ "root" "crang" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.trusted-users = [ "root" "crang" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -56,14 +55,12 @@ in {
 
   security = {
     polkit.enable = true;
-    pam.services.hyprlock = {};
+    pam.services.hyprlock = { };
   };
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-    ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
 
   services.xserver.windowManager.i3.enable = i3;
@@ -94,7 +91,7 @@ in {
     #media-session.enable = true;
   };
 
-   services.logind.lidSwitch = "ignore";
+  services.logind.lidSwitch = "ignore";
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -104,9 +101,9 @@ in {
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "crang";
-    extraGroups = [ "networkmanager" "wheel" "video" "docker"];
+    extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
       neovim
       nerd-fonts.hack
       mpd
@@ -120,10 +117,8 @@ in {
     password = "hello123";
     shell = pkgs.zsh;
     description = "eva";
-    extraGroups = [ "networkmanager" "wheel" "video" "docker"];
-    packages = with pkgs; [
-      vscode
-    ];
+    extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
+    packages = with pkgs; [ vscode ];
   };
 
   programs.zsh.enable = true;
@@ -143,25 +138,32 @@ in {
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      #  wget
+    ];
 
   programs.light.enable = true;
   services.actkbd = {
     enable = true;
     bindings = [
-      { keys = [ 224 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -A 10"; }
-      { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -U 10"; }
+      {
+        keys = [ 224 ];
+        events = [ "key" ];
+        command = "/run/current-system/sw/bin/light -A 10";
+      }
+      {
+        keys = [ 225 ];
+        events = [ "key" ];
+        command = "/run/current-system/sw/bin/light -U 10";
+      }
     ];
   };
 
   virtualisation.docker = {
-  	enable = true;
-	rootless = {
-		enable = true;
-	};
+    enable = true;
+    rootless = { enable = true; };
   };
 
   fonts = {

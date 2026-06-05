@@ -2,33 +2,17 @@
   description = "Christian Rang's home-manager configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    hdmi-switch-cli.url = "github:christianrang/hdmi-switch-cli";
-
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    runreveal-dots = {
-      url = "git+ssh://git@github.com/christianrang/runreveal-dots";
-    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs:
-    let
-      mkHome = system: module:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
-          modules = [ module ];
-          extraSpecialArgs = { inherit inputs; };
-        };
-    in {
-      homeConfigurations = {
-        "runreveal-macbook" =
-          mkHome "aarch64-darwin" ./nix/hosts/runreveal-macbook/home.nix;
-        "dev" = mkHome "x86_64-linux" ./nix/hosts/dev/home.nix;
-        "framework" = mkHome "x86_64-linux" ./nix/hosts/framework/home.nix;
-      };
-    };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; }
+    (inputs.import-tree ./nix/modules);
 }
+
