@@ -31,6 +31,7 @@ in {
       self.modules.alacritty
       self.modules.tmux
       self.modules.zsh
+      self.modules.git
     ];
 
     # desktopConfig.windowManager = "i3";
