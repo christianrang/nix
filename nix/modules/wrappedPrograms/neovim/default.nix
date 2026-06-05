@@ -1,26 +1,41 @@
-{ inputs, self, ... }: {
-  flake.modules.neovim = { pkgs, ... }: {
-    programs.neovim.enable = true;
+{ inputs, self, lib, ... }: {
+  flake.modules.neovim = { pkgs, config, ... }: {
+    options = {
+      enable = lib.mkEnableOption "neovim";
 
-    home.packages = with pkgs; [
-      lua-language-server
-      stylua
-
-      (python313.withPackages (python-pkgs: [ python-pkgs.debugpy ]))
-
-      postgresql
-    ];
-
-    home.file = {
-      ".config/nvim/" = {
-        enable = true;
-        source = ./.config/nvim;
-        recursive = true;
+      languages = {
+        lua = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Install Lua language server and formatter";
+        };
+        python = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Install Python debugger";
+        };
       };
     };
 
-    home.sessionVariables = { EDITOR = "nvim"; };
+    config = {
+      home.packages = with pkgs;
+        [ postgresql neovim ]
+        ++ lib.optionals config.languages.lua [ lua-language-server stylua ]
+        ++ lib.optionals config.languages.python
+        [ (python313.withPackages (python-pkgs: [ python-pkgs.debugpy ])) ];
+
+      home.file = {
+        ".config/nvim/" = {
+          enable = true;
+          source = ./.config/nvim;
+          recursive = true;
+        };
+      };
+
+      home.sessionVariables = { EDITOR = "nvim"; };
+    };
   };
+
   perSystem = { pkgs, self', ... }: {
     apps.neovim = {
       type = "app";
