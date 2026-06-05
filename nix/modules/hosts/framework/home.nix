@@ -29,6 +29,7 @@ in {
       #   ../../modules/terminal
       self.modules.neovim
       self.modules.alacritty
+      self.modules.tmux
     ];
 
     # desktopConfig.windowManager = "i3";
