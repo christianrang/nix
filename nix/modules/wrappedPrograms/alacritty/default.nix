@@ -11,5 +11,14 @@
       };
     };
   };
-  perSystem = { pkgs, self', ... }: { };
+
+  perSystem = { pkgs, ... }: {
+    apps.alacritty = {
+      type = "app";
+      program = "${pkgs.writeShellScript "alacritty" ''
+        ln -sf ${./.config/alacritty} "$HOME/.config/alacritty"
+        exec ${pkgs.lib.getExe pkgs.alacritty} "$@"
+      ''}";
+    };
+  };
 }
