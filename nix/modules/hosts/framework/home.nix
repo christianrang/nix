@@ -55,7 +55,6 @@ in {
         direnv
 
         nodejs
-
       ] ++ (lib.optionals pkgs.stdenv.isLinux [
         alsa-utils
         acpi
@@ -64,6 +63,7 @@ in {
         playerctl
         signal-desktop
         discord
+        zathura
       ]);
 
     # TODO: This should be only on linux
