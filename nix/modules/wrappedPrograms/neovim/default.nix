@@ -19,7 +19,7 @@
 
     config = {
       home.packages = with pkgs;
-        [ postgresql neovim ]
+        [ postgresql neovim ripgrep ]
         ++ lib.optionals config.languages.lua [ lua-language-server stylua ]
         ++ lib.optionals config.languages.python
         [ (python313.withPackages (python-pkgs: [ python-pkgs.debugpy ])) ];
