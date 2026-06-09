@@ -24,6 +24,7 @@ in {
   flake.homeModules.crangModule = { pkgs, ... }: {
     imports = [
       self.modules.neovim
+      self.modules.personal-scripts
       self.modules.alacritty
       self.modules.tmux
       self.modules.zsh

@@ -1,8 +1,11 @@
 { inputs, self, ... }: {
   flake.modules.personal-scripts = { pkgs, ... }: {
+    home.packages = with pkgs; [
+        fd
+    ];
     home.file = {
-      ".bin/gclone".source = ./gclone;
-      ".bin/tmux-sessionizer".source = ./tmux-sessionizer;
+      ".bin/gclone".source = ./scripts/gclone;
+      ".bin/tmux-sessionizer".source = ./scripts/tmux-sessionizer;
     };
   };
 
