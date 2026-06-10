@@ -9,6 +9,11 @@
           default = true;
           description = "Install Lua language server and formatter";
         };
+        nix = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Install Nix language server and formatter";
+        };
         python = lib.mkOption {
           type = lib.types.bool;
           default = true;
@@ -21,6 +26,7 @@
       home.packages = with pkgs;
         [ postgresql neovim ripgrep ]
         ++ lib.optionals config.languages.lua [ lua-language-server stylua ]
+        ++ lib.optionals config.languages.nix [ nixd ]
         ++ lib.optionals config.languages.python
         [ (python313.withPackages (python-pkgs: [ python-pkgs.debugpy ])) ];
 

@@ -35,6 +35,11 @@
     # ── Graphics / OpenGL ────────────────────────────────────────────────────────
     hardware.opengl = { enable = true; };
 
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+    };
+
     # ── Hyprland ─────────────────────────────────────────────────────────────────
     programs.hyprland = {
       enable = true;
