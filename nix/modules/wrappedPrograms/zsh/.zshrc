@@ -101,7 +101,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export CHEAT_USE_FZF=true
 
-. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+# . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
 # alias mods="OPENAI_API_KEY=$(pass show openai/api_key) mods"
 

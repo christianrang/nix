@@ -1,9 +1,7 @@
-{config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -25,14 +23,12 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   # ── Graphics / OpenGL ────────────────────────────────────────────────────────
-  hardware.opengl = {
-    enable = true;
-  };
+  hardware.opengl = { enable = true; };
 
   # ── Hyprland ─────────────────────────────────────────────────────────────────
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;   # XWayland for legacy X11 apps
+    xwayland.enable = true; # XWayland for legacy X11 apps
   };
 
   # XDG portal — required for screen sharing, file pickers, etc.
@@ -47,7 +43,8 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd 'start-hyprland'";
+        command =
+          "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd 'start-hyprland'";
         user = "greeter";
       };
     };
@@ -70,9 +67,9 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "crang";
-    extraGroups = [ "networkmanager" "wheel" "video" "docker"];
+    extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
       neovim
       nerd-fonts.hack
       mpd
@@ -89,23 +86,23 @@
     wl-clipboard
     xwayland
 
-    # Hyprland ecosystem
-    waybar              # status bar
-    wofi                # app launcher
-    mako                # notification daemon
-    hyprpaper           # wallpaper
-    hyprlock            # screen locker
-    hypridle            # idle daemon
+    # # Hyprland ecosystem
+    # waybar              # status bar
+    # wofi                # app launcher
+    # mako                # notification daemon
+    # hyprpaper           # wallpaper
+    # hyprlock            # screen locker
+    # hypridle            # idle daemon
 
     # Terminal
     kitty
 
     # Utilities
-    brightnessctl       # backlight control
-    playerctl           # media keys
-    grim                # screenshots
-    slurp               # region select
-    swappy              # screenshot annotation
+    brightnessctl # backlight control
+    playerctl # media keys
+    grim # screenshots
+    slurp # region select
+    swappy # screenshot annotation
     networkmanagerapplet
 
     # Polkit agent (needed for privilege escalation in GUI)
@@ -117,13 +114,12 @@
     font-awesome
   ];
 
-    programs._1password.enable = true;
+  programs._1password.enable = true;
 
   programs._1password-gui = {
     enable = true;
     polkitPolicyOwners = [ "crang" ];
   };
-
 
   # ── Polkit ────────────────────────────────────────────────────────────────────
   security.polkit.enable = true;
@@ -134,20 +130,18 @@
     after = [ "graphical-session.target" ];
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      ExecStart =
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       Restart = "on-failure";
       RestartSec = 1;
     };
   };
 
-  services.tailscale = {
-    enable = true;
-  };
+  services.tailscale = { enable = true; };
 
   # networking.wg-quick.interfaces.wg0 = {
   #   configFile = "/etc/nixos/modules/wireguard/cj-home.conf";
   # };
-
 
   # ── Fonts ─────────────────────────────────────────────────────────────────────
   fonts.fontconfig.enable = true;
