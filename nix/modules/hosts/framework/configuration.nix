@@ -166,5 +166,9 @@
     virtualisation.docker.enable = true;
 
     system.stateVersion = "24.11"; # do not change after first install
+
+    networking.wg-quick.interfaces.wg0 = {
+      configFile = "/etc/nixos/modules/wireguard/cj-home.conf";
+    };
   };
 }

@@ -33,7 +33,7 @@ in {
       self.modules.git
     ];
 
-    # desktopConfig.windowManager = "i3";
+    desktopConfig.windowManager = "niri";
 
     home.username = "crang";
     home.homeDirectory = homeDirectory;

@@ -1,8 +1,10 @@
 { lib, ... }: {
   flake.modules.hyprlandModule = { pkgs, config, ... }: {
-    options = { enable = lib.mkEnableOption "Enable Hyprland Module"; };
+    options = {
+      hyprlandModule.enable = lib.mkEnableOption "Enable Hyprland Module";
+    };
 
-    config = lib.mkIf config.enable {
+    config = lib.mkIf config.hyprlandModule.enable {
       home.packages = with pkgs; [
         hyprsunset
         hyprlock
