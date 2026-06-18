@@ -20,6 +20,7 @@ vim.api.nvim_create_user_command('AI', function()
         vim.cmd('vsplit')
         vim.api.nvim_win_set_buf(0, ai_buf)
         vim.api.nvim_win_set_width(0, 100)
+        vim.wo.winfixwidth = true
         return
     end
 
@@ -27,6 +28,9 @@ vim.api.nvim_create_user_command('AI', function()
     vim.cmd.vnew()
     local win = vim.api.nvim_get_current_win()
     vim.api.nvim_win_set_width(win, 100)
+    vim.wo.winfixwidth = true
     vim.cmd.term("nix-shell -p claude-code --run claude")
     vim.api.nvim_buf_set_name(0, 'ai')
 end, {})
+
+vim.keymap.set("n", "<leader>ai", ":AI<CR>", { desc = "Toggles [AI] tab" })

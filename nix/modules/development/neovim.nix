@@ -6,6 +6,8 @@
 
     # for vim-dadbod-ui
     postgresql
+
+    claude-code
     ];
 
   home.file = {
