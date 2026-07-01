@@ -37,7 +37,7 @@ in {
 
     slack
 
-    podman
+    # podman # This package may be supported on mac later, but it is not currently
 
     nodejs
   ];
