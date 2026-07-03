@@ -15,6 +15,16 @@
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    services.avahi = {
+      nssmdns = true;
+      enable = true;
+      publish = {
+        enable = true;
+        userServices = true;
+        domain = true;
+      };
+    };
+
     # Fingerprint stuff
     services.fprintd.enable = true;
     security.pam.services.sudo.fprintAuth = true;
@@ -59,7 +69,7 @@
       settings = {
         default_session = {
           command =
-            "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd 'start-hyprland'";
+            "${pkgs.tuigreet}/bin/tuigreet --time --cmd 'start-hyprland'";
           user = "greeter";
         };
       };
@@ -166,9 +176,5 @@
     virtualisation.docker.enable = true;
 
     system.stateVersion = "24.11"; # do not change after first install
-
-    networking.wg-quick.interfaces.wg0 = {
-      configFile = "/etc/nixos/modules/wireguard/cj-home.conf";
-    };
   };
 }

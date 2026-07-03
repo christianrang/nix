@@ -11,7 +11,6 @@
         hypridle
         wofi
         mako
-        eww
         hyprland
       ];
     };
