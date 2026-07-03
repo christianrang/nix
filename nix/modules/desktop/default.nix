@@ -1,11 +1,13 @@
-# desktop/default.nix
 { lib, ... }: {
   flake.modules.desktop = { self, pkgs, config, ... }: {
     imports = [
       self.modules.catppuccinCursor
+      self.modules.alacritty
       self.modules.eww
       self.modules.hyprlandModule
-      self.modules.myNiri
+      self.modules.niriModule
+      self.modules.braveModule
+      self.modules.chromiumModule
     ];
 
     options = {
@@ -20,7 +22,7 @@
         hyprlandModule.enable = true;
       })
       (lib.mkIf (config.desktopConfig.windowManager == "niri") {
-        myNiri.enable = true;
+        niriModule.enable = true;
       })
     ]);
   };

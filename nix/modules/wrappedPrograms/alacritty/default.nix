@@ -1,4 +1,4 @@
-{ inputs, self, ... }: {
+{ ... }: {
   flake.modules.alacritty = { pkgs, ... }: {
     home.packages = with pkgs;
       [ alacritty nerd-fonts.hack ]
