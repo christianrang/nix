@@ -5,7 +5,7 @@
       self.modules.catppuccinCursor
       self.modules.eww
       self.modules.hyprlandModule
-      # self.modules.niri
+      self.modules.myNiri
     ];
 
     options = {
@@ -19,9 +19,9 @@
       (lib.mkIf (config.desktopConfig.windowManager == "hyprland") {
         hyprlandModule.enable = true;
       })
-      # (lib.mkIf (config.desktopConfig.windowManager == "niri") {
-      #   niri.enable = true;
-      # })
+      (lib.mkIf (config.desktopConfig.windowManager == "niri") {
+        myNiri.enable = true;
+      })
     ]);
   };
 }
