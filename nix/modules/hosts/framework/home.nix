@@ -22,16 +22,7 @@ in {
   # This is your home.nix, your module where you configure home-manager
   # It's imported both in standalone configuration above, and in your nixos configuration
   flake.homeModules.crangModule = { pkgs, ... }: {
-    imports = [
-      self.modules.shell
-      self.modules.desktop
-      self.modules.neovim
-      self.modules.personal-scripts
-      self.modules.alacritty
-      self.modules.tmux
-      self.modules.zsh
-      self.modules.git
-    ];
+    imports = [ self.modules.shell self.modules.desktop ];
 
     # desktopConfig.windowManager = "niri";
 
@@ -73,18 +64,6 @@ in {
     home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
     programs.home-manager.enable = true;
-
-    # TODO: some of the configuration only needs to be set on linux
-    programs.brave = {
-      enable = true;
-      commandLineArgs =
-        [ "--enable-features=TouchpadOverscrollHistoryNavigation" ];
-      extensions = [
-        "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1password
-      ] ++ (lib.optionals (theme == theme_catppuccin-mocha) [
-        "bkkmolkhemgaeaeggcmfbghljjjoofoh" # Catppuccin
-      ]);
-    };
 
     programs.chromium = {
       enable = pkgs.stdenv.isLinux;
