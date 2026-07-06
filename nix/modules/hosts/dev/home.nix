@@ -2,19 +2,19 @@
 
 let homeDirectory = "/root";
 in {
-  flake.homeConfigurations.crang =
+  flake.homeConfigurations.home =
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
       modules = [
-        self.homeModules.crangModule
+        self.homeModules.rootModule
         {
           home.username = "root";
-          home.homeDirectory = "/home/crang";
+          home.homeDirectory = "/home/root";
         }
       ];
     };
 
-  flake.homeModules.crangModule = { pkgs, ... }: {
+  flake.homeModules.rootModule = { pkgs, ... }: {
     imports = [ self.modules.shell ];
 
     # desktopConfig.windowManager = "i3";
