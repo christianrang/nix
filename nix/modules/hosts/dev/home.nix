@@ -1,44 +1,58 @@
-{ self, pkgs, ... }:
+{ self, pkgs, inputs, ... }:
 
 let homeDirectory = "/root";
 in {
-  imports = [ self.modules.shell ];
+  flake.homeConfigurations.crang =
+    inputs.home-manager.lib.homeManagerConfiguration {
+      pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+      modules = [
+        self.homeModules.crangModule
+        {
+          home.username = "root";
+          home.homeDirectory = "/home/crang";
+        }
+      ];
+    };
 
-  # desktopConfig.windowManager = "i3";
+  flake.homeModules.crangModule = { pkgs, ... }: {
+    imports = [ self.modules.shell ];
 
-  home.username = "root";
-  home.homeDirectory = homeDirectory;
+    # desktopConfig.windowManager = "i3";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+    home.username = "root";
+    home.homeDirectory = homeDirectory;
 
-  nixpkgs.config.allowUnfree = true;
+    # This value determines the Home Manager release that your configuration is
+    # compatible with. This helps avoid breakage when a new Home Manager release
+    # introduces backwards incompatible changes.
+    #
+    # You should not change this value, even if you update Home Manager. If you do
+    # want to update the value, then make sure to first check the Home Manager
+    # release notes.
+    home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  home.packages = with pkgs; [
-    socat
+    nixpkgs.config.allowUnfree = true;
 
-    devenv
-    direnv
+    home.packages = with pkgs; [
+      socat
 
-    nodejs
-  ];
+      devenv
+      direnv
 
-  # TODO: This should be only on linux
-  home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+      nodejs
+    ];
 
-  programs.home-manager.enable = true;
+    # TODO: This should be only on linux
+    home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
-  programs.go = {
-    enable = true;
-    env = {
-      GOPRIVATE = [ "github.com/christianrang" ];
-      GOPATH = "${homeDirectory}/progdev/go";
+    programs.home-manager.enable = true;
+
+    programs.go = {
+      enable = true;
+      env = {
+        GOPRIVATE = [ "github.com/christianrang" ];
+        GOPATH = "${homeDirectory}/progdev/go";
+      };
     };
   };
 }
