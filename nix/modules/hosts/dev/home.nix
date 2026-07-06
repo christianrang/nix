@@ -1,13 +1,8 @@
-{ pkgs, ... }:
+{ self, pkgs, ... }:
 
-let
-  homeDirectory = "/root";
+let homeDirectory = "/root";
 in {
-  imports = [
-    ../../modules/development
-    ../../modules/shell
-    ../../modules/terminal
-  ];
+  imports = [ self.modules.shell ];
 
   # desktopConfig.windowManager = "i3";
 
