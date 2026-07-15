@@ -1,0 +1,7 @@
+set recolor
+set selection-clipboard clipboard
+set recolor-lightcolor \#1e1e2e
+set default-bg \#1e1e2e
+set highlight-color \#f9e2af
+set highlight-color \#f9e2af
+set highlight-fg \#f9e2af
