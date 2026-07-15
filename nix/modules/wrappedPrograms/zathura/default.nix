@@ -3,12 +3,12 @@
     home.packages = with pkgs; [ zathura ];
 
     home.file = {
-        ".config/zathura/" = {
-            enable = true;
-            source = ./.config/zathura/;
-            recursive = true;
-        };
-     };
+      ".config/zathura/" = {
+        enable = true;
+        source = ./.config/zathura;
+        recursive = true;
+      };
+    };
   };
 
   perSystem = { pkgs, ... }: {
