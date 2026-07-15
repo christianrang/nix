@@ -8,6 +8,7 @@
       self.modules.niriModule
       self.modules.braveModule
       self.modules.chromiumModule
+      self.modules.zathura
     ];
 
     options = {
