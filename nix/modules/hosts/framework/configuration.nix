@@ -136,7 +136,12 @@
       noto-fonts
       noto-fonts-color-emoji
       font-awesome
+
+      libimobiledevice
+      ifuse # optional, to mount using 'ifuse'
     ];
+
+    services.usbmuxd.enable = true;
 
     programs._1password.enable = true;
 
