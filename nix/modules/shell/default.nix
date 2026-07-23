@@ -1,6 +1,10 @@
 { self, ... }: {
   flake.modules.shell = { pkgs, ... }: {
-    home.packages = with pkgs; [ bat jq ];
+    home.packages = with pkgs; [
+      bat
+      jq
+      tealdeer
+    ];
 
     imports = [
       self.modules.neovim
