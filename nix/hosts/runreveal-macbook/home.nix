@@ -32,14 +32,15 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    obsidian
+    # obsidian # This package has broken deps
     socat
 
     slack
 
-    # podman # This package may be supported on mac later, but it is not currently
+    podman
 
     nodejs
+    jujutsu
   ];
 
   # TODO: This should be only on linux
