@@ -40,6 +40,7 @@ plugins=(
     terraform
     helm
     fzf
+    jj
 )
 
 source $ZSH/oh-my-zsh.sh
