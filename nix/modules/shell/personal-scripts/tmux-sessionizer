@@ -3,13 +3,25 @@
 # copied from https://github.com/ThePrimeagen
 
 if [[ -z $DEVPATHS ]]; then
-    DEVPATHS=`fd --exact-depth=3 --base-directory ~/progdev/`
+    DEVPATHS=`fd --exact-depth=3 --base-directory ~/progdev/ | rg -P '^(?!jj|go).*'`
+    DEVPATHS+=`fd --exact-depth=3 --base-directory ~/progdev/jj`
 fi
+
+used_jj=false
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(printf "%s\n" "${DEVPATHS[@]}" | fzf | awk "{print \"${HOME}/progdev/\" \$1}")
+    selected_suffix=$(printf "%s\n" "${DEVPATHS[@]}" | fzf)
+    selected_jj=$(printf "%s\n" "$selected_suffix" | awk "{print \"${HOME}/progdev/jj/\" \$1}")
+    
+    if [ -d $selected_jj ]; then
+        selected=$selected_jj
+        used_jj=true
+    else
+        selected=$(printf "%s\n" "$selected_suffix" | awk "{print \"${HOME}/progdev/\" \$1}")
+    fi
+    echo $selected
 fi
 
 if [[ -z $selected ]]; then
@@ -17,14 +29,14 @@ if [[ -z $selected ]]; then
 fi
 
 
-selected_name=$(basename "$selected" | tr . _)
+selected_name=$(basename "$selected")
 tmux_running=$(pgrep tmux)
 
 pushd $selected > /dev/null
 
 worktrees=`git worktree list 2>/dev/null`
 
-if [ "$(printf "%s" "$worktrees" | awk '{print $1}')/" != $selected ] && [ -z $1 ]; then
+if [ "$(printf "%s" "$worktrees" | awk '{print $1}')/" != $selected ] && [ -z $1 ] && ! $used_jj; then
     selected_worktree=`printf "%s" "$worktrees" | fzf`
     worktree_name=`printf "${selected_worktree}" | awk '{print $3}' | tr -d "[]"`
     selected_name="$(basename "$selected" | tr . _)/${worktree_name}"
