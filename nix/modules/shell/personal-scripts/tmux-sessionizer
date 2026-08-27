@@ -29,7 +29,7 @@ if [[ -z $selected ]]; then
 fi
 
 
-selected_name=$(basename "$selected")
+selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
 pushd $selected > /dev/null
