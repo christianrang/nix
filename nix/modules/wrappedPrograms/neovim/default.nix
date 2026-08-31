@@ -1,8 +1,13 @@
-{ inputs, self, lib, ... }: {
+{
+  inputs,
+  self,
+  lib,
+  ...
+}:
+{
   flake.modules.neovim = { pkgs, config, ... }: {
     options = {
       enable = lib.mkEnableOption "neovim";
-
       languages = {
         lua = lib.mkOption {
           type = lib.types.bool;
@@ -14,21 +19,39 @@
           default = true;
           description = "Install Nix language server and formatter";
         };
+        rust = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Install rust language server";
+        };
         python = lib.mkOption {
           type = lib.types.bool;
           default = true;
-          description = "Install Python debugger";
+          description = "Install python debugger";
         };
       };
     };
 
     config = {
-      home.packages = with pkgs;
-        [ postgresql neovim ripgrep ]
-        ++ lib.optionals config.languages.lua [ lua-language-server stylua ]
+      home.packages =
+        with pkgs;
+        [
+          postgresql
+          neovim
+          ripgrep
+        ]
+        ++ lib.optionals config.languages.lua [
+          lua-language-server
+          stylua
+        ]
         ++ lib.optionals config.languages.nix [ nixd ]
-        ++ lib.optionals config.languages.python
-        [ (python313.withPackages (python-pkgs: [ python-pkgs.debugpy ])) ];
+        ++ lib.optionals config.languages.rust [
+          rust-analyzer
+          rustc
+        ]
+        ++ lib.optionals config.languages.python [
+          (python313.withPackages (python-pkgs: [ python-pkgs.debugpy ]))
+        ];
 
       home.file = {
         ".config/nvim/" = {
@@ -38,7 +61,9 @@
         };
       };
 
-      home.sessionVariables = { EDITOR = "nvim"; };
+      home.sessionVariables = {
+        EDITOR = "nvim";
+      };
     };
   };
 
