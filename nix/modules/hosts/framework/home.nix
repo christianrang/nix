@@ -65,19 +65,6 @@ in {
 
     programs.home-manager.enable = true;
 
-    programs.chromium = {
-      enable = pkgs.stdenv.isLinux;
-      extensions = [
-        "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1password
-      ] ++ (lib.optionals (theme == theme_catppuccin-mocha) [
-        "bkkmolkhemgaeaeggcmfbghljjjoofoh" # Catppuccin
-      ]);
-      commandLineArgs = [
-        "--enable-features=TouchpadOverscrollHistoryNavigation,UseOzonePlatform"
-        "--ozone-platform=wayland"
-      ];
-    };
-
     programs.go = {
       enable = true;
       env = {
