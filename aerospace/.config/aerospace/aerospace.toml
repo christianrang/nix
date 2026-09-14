@@ -14,9 +14,9 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 alt-enter = '''exec-and-forget alacritty'''
 
 # i3 wraps focus by default
-alt-h =         'focus --boundaries-action wrap-around-the-workspace left'
-alt-j =         'focus --boundaries-action wrap-around-the-workspace down'
-alt-k =         'focus --boundaries-action wrap-around-the-workspace up'
+alt-h = 'focus --boundaries-action wrap-around-the-workspace left'
+alt-j = 'focus --boundaries-action wrap-around-the-workspace down'
+alt-k = 'focus --boundaries-action wrap-around-the-workspace up'
 alt-l = 'focus --boundaries-action wrap-around-the-workspace right'
 
 alt-shift-h = 'move left'
@@ -65,10 +65,6 @@ alt-shift-c = 'reload-config'
 
 alt-r = 'mode resize'
 
-alt-a = 'exec-and-forget open https://fishtechgroup.atlassian.net/jira/ops/alerts\?view\=list\&query\=status:%20open%20AND%20responders:%20\(%22MS%20Engineering%20Data%22\)%20AND%20\(priority%20%3E\=%20P3%20OR%20source:%20%22jira-software-cloud%22\)\&filter\=cc2a9da0-6c2a-4ffa-92f8-163a427f9f73'
-alt-i = 'exec-and-forget open https://fishtechgroup.atlassian.net/jira/software/c/projects/DATA/boards/1764'
-alt-c = 'exec-and-forget open https://fishtechgroup.atlassian.net/jira/software/c/projects/ENG/boards/14'
-
 alt-n = 'exec-and-forget open https://www.notion.so/326bbc03f62b8051853cd2744ea53a9d?v=326bbc03f62b80b3b507000c8d6cc52b'
 
 [mode.resize.binding]
@@ -78,3 +74,15 @@ k = 'resize height -50'
 l = 'resize width +50'
 enter = 'mode main'
 esc = 'mode main'
+
+
+[workspace-to-monitor-force-assignment]
+1 = 'DELL S3425DW'
+2 = 'Built-in Retina Display'
+3 = 'Built-in Retina Display'
+4 = 'Built-in Retina Display'
+5 = 'Built-in Retina Display'
+6 = 'DELL S3425DW'
+7 = 'DELL S3425DW'
+8 = 'DELL S3425DW'
+9 = 'DELL S3425DW'
