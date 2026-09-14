@@ -17,9 +17,11 @@
 
   outputs = { nixpkgs, home-manager, ... }@inputs:
     let
+      overlays = import ./nix/overlays;
+
       mkHome = system: module:
         home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs { inherit system overlays; };
           modules = [ module ];
           extraSpecialArgs = { inherit inputs; };
         };
