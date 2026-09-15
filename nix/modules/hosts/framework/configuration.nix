@@ -2,8 +2,10 @@
 
   # This is your system configuration entry-point
   flake.nixosConfigurations.framework = inputs.nixpkgs.lib.nixosSystem {
-    modules =
-      [ self.nixosModules.frameworkModule self.nixosModules.myHomeManager ];
+    modules = [
+      self.nixosModules.frameworkModule
+      self.nixosModules.myHomeManager
+    ];
   };
 
   # This is your configuration.nix, a place where you configure your system
@@ -13,7 +15,10 @@
 
     imports = [ self.nixosModules.myMachineHardware ];
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     services.avahi = {
       nssmdns = true;
@@ -43,7 +48,9 @@
     i18n.defaultLocale = "en_US.UTF-8";
 
     # ── Graphics / OpenGL ────────────────────────────────────────────────────────
-    hardware.opengl = { enable = true; };
+    hardware.opengl = {
+      enable = true;
+    };
 
     hardware.bluetooth = {
       enable = true;
@@ -68,8 +75,7 @@
       enable = true;
       settings = {
         default_session = {
-          command =
-            "${pkgs.tuigreet}/bin/tuigreet --time --cmd 'start-hyprland'";
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd 'start-hyprland'";
           user = "greeter";
         };
       };
@@ -92,7 +98,12 @@
       isNormalUser = true;
       shell = pkgs.zsh;
       description = "crang";
-      extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "video"
+        "docker"
+      ];
       packages = with pkgs; [
         neovim
         nerd-fonts.hack
@@ -159,14 +170,15 @@
       after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart =
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
       };
     };
 
-    services.tailscale = { enable = true; };
+    services.tailscale = {
+      enable = true;
+    };
 
     # networking.wg-quick.interfaces.wg0 = {
     #   configFile = "/etc/nixos/modules/wireguard/cj-home.conf";
