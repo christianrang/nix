@@ -113,3 +113,5 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 alias gh="GIT_DIR=`jj git root` gh"
+
+alias tmproj='TMP=$(mktemp -d); cp -r ~/templates/`ls ~/templates | fzf`/* $TMP && echo $TMP'
