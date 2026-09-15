@@ -1,4 +1,5 @@
 # Reference: https://github.com/i3/i3/blob/next/etc/config
+config-version=2
 
 # i3 doesn't have "normalizations" feature that why we disable them here.
 # But the feature is very helpful.
@@ -82,7 +83,7 @@ esc = 'mode main'
 3 = 'Built-in Retina Display'
 4 = 'Built-in Retina Display'
 5 = 'Built-in Retina Display'
-6 = 'DELL S3425DW'
-7 = 'DELL S3425DW'
-8 = 'DELL S3425DW'
-9 = 'DELL S3425DW'
+6 = 'Built-in Retina Display'
+7 = 'Built-in Retina Display'
+8 = 'Built-in Retina Display'
+9 = 'Built-in Retina Display'
