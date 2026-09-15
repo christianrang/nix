@@ -1,28 +1,37 @@
-{ self, inputs, pkgs, lib, ... }:
+{
+  self,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 let
   theme_catppuccin-mocha = "catppuccin-mocha";
   theme = theme_catppuccin-mocha;
   homeDirectory = "/home/crang";
-in {
+in
+{
 
   # This is your standalone home-manager configuration, meant to be used on non-nixos machines
   # with the home-manager command
-  flake.homeConfigurations.crang =
-    inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
-      modules = [
-        self.homeModules.crangModule
-        {
-          home.username = "crang";
-          home.homeDirectory = "/home/crang";
-        }
-      ];
-    };
+  flake.homeConfigurations.crang = inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+    modules = [
+      self.homeModules.crangModule
+      {
+        home.username = "crang";
+        home.homeDirectory = "/home/crang";
+      }
+    ];
+  };
 
   # This is your home.nix, your module where you configure home-manager
   # It's imported both in standalone configuration above, and in your nixos configuration
   flake.homeModules.crangModule = { pkgs, ... }: {
-    imports = [ self.modules.shell self.modules.desktop ];
+    imports = [
+      self.modules.shell
+      self.modules.desktop
+    ];
 
     # desktopConfig.windowManager = "niri";
 
@@ -40,16 +49,19 @@ in {
 
     nixpkgs.config.allowUnfree = true;
 
-    home.packages = with pkgs;
+    home.packages =
+      with pkgs;
       [
         obsidian
         socat
 
         devenv
         direnv
+        jujutsu
 
         nodejs
-      ] ++ (lib.optionals pkgs.stdenv.isLinux [
+      ]
+      ++ (lib.optionals pkgs.stdenv.isLinux [
         alsa-utils
         acpi
         brightnessctl
@@ -61,9 +73,26 @@ in {
       ]);
 
     # TODO: This should be only on linux
-    home.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+    home.sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
 
     programs.home-manager.enable = true;
+
+    gtk.enable = true;
+    gtk.theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+
+    qt = {
+      enable = true;
+      platformTheme.name = "adwaita"; # Or "gtk3" to mirror GTK settings directly
+      style = {
+        name = "adwaita-dark";
+        package = pkgs.adwaita-qt; # Explicitly pulls in the theme engines
+      };
+    };
 
     programs.go = {
       enable = true;
