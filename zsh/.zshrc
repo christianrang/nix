@@ -111,3 +111,5 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+alias gh="GIT_DIR=`jj git root` gh"
