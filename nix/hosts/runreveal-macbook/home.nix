@@ -32,7 +32,7 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    # obsidian # This package has broken deps
+    obsidian
     socat
 
     slack
