@@ -9,9 +9,10 @@ vim.api.nvim_create_autocmd('TermOpen', {
     end,
 })
 
+-- Tagged so other plugins' terminals (e.g. Claude) are never reused.
 local find_terminal_buf = function()
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buftype == 'terminal' then
+        if vim.api.nvim_buf_is_loaded(buf) and vim.b[buf].scratch_terminal then
             return buf
         end
     end
@@ -19,14 +20,14 @@ local find_terminal_buf = function()
     return nil
 end
 
--- Focus a terminal, reusing an existing terminal buffer when there is one.
--- Returns its channel id.
+-- Focus the scratch terminal, creating it if needed. Returns its channel id.
 local open_terminal = function()
     local buf = find_terminal_buf()
 
     if buf == nil then
         vim.cmd.vnew()
         vim.cmd.term()
+        vim.b.scratch_terminal = true
 
         return vim.bo.channel
     end
