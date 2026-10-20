@@ -12,6 +12,8 @@
       self.modules.tmux
       self.modules.zsh
       self.modules.git
+      self.modules.utilities
+      self.modules.pass
     ];
   };
 }
