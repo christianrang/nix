@@ -15,7 +15,10 @@ in
   # This is your standalone home-manager configuration, meant to be used on non-nixos machines
   # with the home-manager command
   flake.homeConfigurations.crang = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+    pkgs = import inputs.nixpkgs {
+      system = "x86_64-linux";
+      config.allowUnfree = true;
+    };
     modules = [
       self.homeModules.crangModule
       {
@@ -46,8 +49,6 @@ in
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
     home.stateVersion = "25.05"; # Please read the comment before changing.
-
-    nixpkgs.config.allowUnfree = true;
 
     home.packages =
       with pkgs;
