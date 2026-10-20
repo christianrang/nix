@@ -84,12 +84,64 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1781577229,
+        "narHash": "sha256-lrp67w8AulE9Ks53n27I45ADSzbOCn4H+CNW1Ck8B+8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "reveal-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781742268,
+        "narHash": "sha256-HFgV8ARbsR+/hgMMK/gewIVuOI/UxKAr90Bs29r1GmM=",
+        "ref": "refs/heads/main",
+        "rev": "a8cdf16a4e549d823a368e4a606d8e0f3985ef70",
+        "revCount": 4435,
+        "type": "git",
+        "url": "ssh://git@github.com/runreveal/runreveal"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/runreveal/runreveal"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "runreveal-dots": "runreveal-dots"
+      }
+    },
+    "runreveal-dots": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2",
+        "reveal-src": "reveal-src"
+      },
+      "locked": {
+        "lastModified": 1784555290,
+        "narHash": "sha256-AEovgpc0Cl4Ub2JiTjbSSzYRe/N2R5eLuBSdvf8Cb6c=",
+        "ref": "refs/heads/main",
+        "rev": "90c04aea62fcf348c2629301007f392916e7210d",
+        "revCount": 15,
+        "type": "git",
+        "url": "ssh://git@github.com/christianrang/runreveal-dots"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/christianrang/runreveal-dots"
       }
     }
   },

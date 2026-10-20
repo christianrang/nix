@@ -8,7 +8,9 @@
 #
 # Pinning sourceRoot skips the guessing entirely. Upstream nixpkgs still has no
 # sourceRoot here as of the current pin, so this cannot be fixed by a bump.
-final: prev:
-prev.lib.optionalAttrs prev.stdenv.hostPlatform.isDarwin {
-  brave = prev.brave.overrideAttrs (_: { sourceRoot = "Brave Browser.app"; });
+{ ... }: {
+  flake.overlays.braveDarwin = final: prev:
+    prev.lib.optionalAttrs prev.stdenv.hostPlatform.isDarwin {
+      brave = prev.brave.overrideAttrs (_: { sourceRoot = "Brave Browser.app"; });
+    };
 }
