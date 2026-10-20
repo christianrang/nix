@@ -1,5 +1,5 @@
-{ lib, ... }: {
-  flake.modules.desktop = { self, pkgs, config, ... }: {
+{ lib, self, ... }: {
+  flake.modules.desktop = { pkgs, config, ... }: {
     imports = [
       self.modules.catppuccinCursor
       self.modules.alacritty

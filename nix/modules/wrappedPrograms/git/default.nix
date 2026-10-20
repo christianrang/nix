@@ -9,7 +9,7 @@
     apps.git = {
       type = "app";
       program = "${pkgs.writeShellScript "git" ''
-        ln -sf ${./.gitrc} "$HOME/.gitconfig"
+        ln -sf ${./.gitconfig} "$HOME/.gitconfig"
         exec ${pkgs.lib.getExe pkgs.git} "$@"
       ''}";
     };

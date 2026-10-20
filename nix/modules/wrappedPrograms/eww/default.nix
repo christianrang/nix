@@ -1,5 +1,5 @@
 { inputs, self, ... }: {
-  flake.modules.eww = { pkgs, ... }: { home.packages = with pkgs; [ eww jq ]; };
+  flake.modules.eww = { pkgs, lib, ... }: { home.packages = lib.optionals pkgs.stdenv.isLinux [ pkgs.eww pkgs.jq ]; };
 
   perSystem = { ... }: { };
 }

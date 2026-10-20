@@ -9,7 +9,6 @@ in {
         self.homeModules.rootModule
         {
           home.username = "root";
-          home.homeDirectory = "/home/root";
         }
       ];
     };
