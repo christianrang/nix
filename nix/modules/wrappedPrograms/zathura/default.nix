@@ -1,5 +1,5 @@
 { ... }: {
-  flake.modules.zathura = { pkgs, ... }: {
+  flake.modules.zathura = { pkgs, lib, ... }: lib.mkIf pkgs.stdenv.isLinux {
     home.packages = with pkgs; [ zathura ];
 
     home.file = {
