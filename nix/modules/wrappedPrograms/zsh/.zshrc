@@ -40,6 +40,7 @@ plugins=(
     terraform
     helm
     fzf
+    jj
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -101,10 +102,16 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export CHEAT_USE_FZF=true
 
-# . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ] && . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
 # alias mods="OPENAI_API_KEY=$(pass show openai/api_key) mods"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+alias gh='GIT_DIR=`jj git root` gh'
+
+alias tmproj='TMP=$(mktemp -d); cp -r ~/templates/`ls ~/templates | fzf`/* $TMP && echo $TMP'

@@ -39,6 +39,7 @@
           postgresql
           neovim
           ripgrep
+          claude-code
         ]
         ++ lib.optionals config.languages.lua [
           lua-language-server

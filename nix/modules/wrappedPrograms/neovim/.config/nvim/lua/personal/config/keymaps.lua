@@ -35,3 +35,19 @@ vim.keymap.set('n', '<leader>cf', function()
     vim.fn.setreg('+', path)
     vim.notify('Copied: ' .. path, vim.log.levels.INFO)
 end, { desc = 'Copy filename to clipboard' })
+
+-- Marks
+vim.opt.shada = "!,'100,<50,s10,h"
+
+-- Make all lowercase marks global by mapping them to their uppercase equivalents.
+-- e.g. `ma` sets mark A (global), `'a` / `a` jump to it from any file.
+for c = string.byte('a'), string.byte('z') do
+    local lower = string.char(c)
+    local upper = string.char(c - 32)
+    -- set mark
+    vim.keymap.set('n', 'm' .. lower, 'm' .. upper, { noremap = true, silent = true })
+    -- jump to line of mark (single-quote style)
+    vim.keymap.set('n', "'" .. lower, "'" .. upper, { noremap = true, silent = true })
+    -- jump to exact position of mark (backtick style)
+    vim.keymap.set('n', '`' .. lower, '`' .. upper, { noremap = true, silent = true })
+end
