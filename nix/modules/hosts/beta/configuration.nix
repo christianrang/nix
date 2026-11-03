@@ -2,11 +2,16 @@
 
   # The system itself, mirroring how the framework host is declared.
   flake.nixosConfigurations.beta = inputs.nixpkgs.lib.nixosSystem {
-    modules = [ self.nixosModules.betaModule ];
+    modules = [ 
+      self.nixosModules.betaModule 
+      self.nixosModules.myHomeManager
+    ];
   };
 
   # The NixOS configuration, formerly the bare /etc/nixos/configuration.nix.
   flake.nixosModules.betaModule = { config, pkgs, ... }: {
+    home-manager.users.crang = self.homeModules.crangModule;
+
     imports = [ self.nixosModules.betaHardware ];
 
     # Needed so you can keep rebuilding from this flake after the first switch.
@@ -38,6 +43,13 @@
     services.displayManager.gdm.enable = true;
     services.desktopManager.gnome.enable = true;
 
+    programs._1password.enable = true;
+
+    programs._1password-gui = {
+      enable = true;
+      polkitPolicyOwners = [ "crang" ];
+    };
+
     services.xserver.xkb = {
       layout = "us";
       variant = "";
@@ -64,6 +76,61 @@
     };
 
     programs.firefox.enable = true;
+
+      programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports for Source Dedicated Server
+    
+    # Enable Gamescope (the micro-compositor used on the Steam Deck)
+    gamescopeSession.enable = true;
+  };
+
+  # Optimize system performance for gaming on demand
+  programs.gamemode.enable = true;
+
+    hardware.xpadneo.enable = true;
+
+    hardware.bluetooth = {
+  enable = true;
+  powerOnBoot = true;
+  settings = {
+    General = {
+      Privacy = "device";
+      JustWorksRepairing = "always";
+      Class = "0x000100";
+      FastConnectable = "true";
+    };
+  };
+};
+
+  environment.systemPackages = with pkgs; [
+    protonup-ng
+  ];
+
+    environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+  };
+
+
+
+  # Enable OpenGL/Vulkan
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # Crucial for running 32-bit games (like Wine/Proton)
+  };
+
+    services.xserver.videoDrivers = [ "nvidia" ];
+  
+  # Essential Nvidia settings
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false; # Use proprietary drivers (better performance for games)
+  };
+
+
+
+    nixpkgs.config.allowUnfree = true;
 
     services.openssh = {
       enable = true;
