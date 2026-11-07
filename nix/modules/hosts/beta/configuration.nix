@@ -17,6 +17,16 @@
     # Needed so you can keep rebuilding from this flake after the first switch.
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    services.avahi = {
+      nssmdns = true;
+      enable = true;
+      publish = {
+        enable = true;
+        userServices = true;
+        domain = true;
+      };
+    };
+
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -66,6 +76,7 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      wireplumber.enable = config.services.pipewire.enable;
     };
 
     users.users."crang" = {
@@ -106,6 +117,9 @@
 
   environment.systemPackages = with pkgs; [
     protonup-ng
+
+    # for sound things
+    easyeffects
   ];
 
     environment.sessionVariables = {
@@ -127,6 +141,8 @@
     modesetting.enable = true;
     open = false; # Use proprietary drivers (better performance for games)
   };
+
+
 
 
 
