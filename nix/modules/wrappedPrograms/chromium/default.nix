@@ -9,7 +9,7 @@
 
     config = {
       programs.chromium = {
-        enable = pkgs.stdenv.isLinux;
+        enable = pkgs.stdenv.hostPlatform.isLinux;
         extensions = [
           "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1password
         ] ++ (lib.optionals (config.chromiumModule.theme == "catppuccin-mocha")

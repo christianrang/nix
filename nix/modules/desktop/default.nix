@@ -18,7 +18,7 @@
       };
     };
 
-    config = lib.mkIf pkgs.stdenv.isLinux (lib.mkMerge [
+    config = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (lib.mkMerge [
       (lib.mkIf (config.desktopConfig.windowManager == "hyprland") {
         hyprlandModule.enable = true;
       })

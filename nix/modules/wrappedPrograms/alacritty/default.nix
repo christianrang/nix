@@ -2,7 +2,7 @@
   flake.modules.alacritty = { pkgs, ... }: {
     home.packages = with pkgs;
       [ alacritty nerd-fonts.hack ]
-      ++ (lib.optionals (pkgs.stdenv.isLinux) [ ghostty ]);
+      ++ (lib.optionals (pkgs.stdenv.hostPlatform.isLinux) [ ghostty ]);
 
     home.file = {
       ".config/alacritty/" = {
