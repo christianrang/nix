@@ -70,10 +70,14 @@
 
     users.users."crang" = {
       isNormalUser = true;
+      shell = pkgs.zsh;
       description = "Christian";
       extraGroups = [ "networkmanager" "wheel" ];
-      packages = with pkgs; [ ];
+      packages = with pkgs; [ 
+      ];
     };
+
+    programs.zsh.enable = true;
 
     programs.firefox.enable = true;
 
